@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property resource="config/properties/logs.properties" />
+	<jmxConfigurator />
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- 典型的日志pattern -->
+		<encoder>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!-- 
+	<appender name="syslog" class="ch.qos.logback.classic.net.SyslogAppender">
+	    <syslogHost>${syslogHost}</syslogHost>
+        <facility>LOCAL1</facility>
+        <suffixPattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</suffixPattern>
+	</appender>
+	 -->
+	<!-- 演示按时间滚动的策略 -->
+	<appender name="defaultLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logPath}/car.log</file>
+		
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logPath}/car.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- 保留 30天数据，默认无限-->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		
+		<encoder>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- project default level -->
+	<logger name="order_system" level="${level}" />
+	
+	<logger name="dao" level="DEBUG">
+		daoFILE为实际定义的appender
+	</logger>
+	
+	<!-- root -->
+	<root level="INFO">
+		<appender-ref ref="console" />
+		<appender-ref ref="defaultLogFile" />
+		<!--<appender-ref ref="syslog" /> -->
+	</root>
+</configuration>

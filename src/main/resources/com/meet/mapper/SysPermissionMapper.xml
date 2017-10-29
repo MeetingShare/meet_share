@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meet.orm.dao.SysPermissionMapper">
+	<resultMap id="BaseResultMap" type="com.meet.orm.pojo.SysPermission">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="f_id" property="fId" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="controller_url" property="controllerUrl"
+			jdbcType="VARCHAR" />
+		<result column="weight" property="weight" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, f_id, name, controller_url, weight, create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.meet.orm.pojo.SysPermission">
+		insert into sys_permission
+		(id, f_id, name,
+		controller_url, weight, create_time
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{fId,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{controllerUrl,jdbcType=VARCHAR},
+		#{weight,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.meet.orm.pojo.SysPermission">
+		insert into sys_permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="fId != null">
+				f_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="controllerUrl != null">
+				controller_url,
+			</if>
+			<if test="weight != null">
+				weight,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="fId != null">
+				#{fId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="controllerUrl != null">
+				#{controllerUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				#{weight,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.SysPermission">
+		update sys_permission
+		<set>
+			<if test="fId != null">
+				f_id = #{fId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="controllerUrl != null">
+				controller_url = #{controllerUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				weight = #{weight,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.SysPermission">
+		update
+		sys_permission
+		set f_id = #{fId,jdbcType=INTEGER},
+		name =
+		#{name,jdbcType=VARCHAR},
+		controller_url =
+		#{controllerUrl,jdbcType=VARCHAR},
+		weight = #{weight,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+	<!-- 获取所有资源 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission
+	</select>
+	<!-- 获取所有资源分页 -->
+
+	<select id="findPermissionListPage" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		t1.*, t2.name as fName
+		from sys_permission t1 left join sys_permission t2 on
+		t2.id = t1.f_id
+		<where>
+			<if test="name!=null">
+				t1.name LIKE
+				CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%')
+			</if>
+		</where>
+		meet by weight asc, id desc
+	</select>
+	<!-- 通过角色名称获取资源信息 -->
+	<select id="selectByNameAndFId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission where name=#{name} and f_id=#{fId}
+	</select>
+	<!-- 删除资源 -->
+	<delete id="delete" parameterType="int">
+		delete from sys_permission
+		where
+		id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 获取当前菜单的子集菜单 -->
+	<select id="selectByFid" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission where f_id=#{fId}
+	</select>
+	<!-- 獲取所有一級菜單 -->
+	<select id="selectParentPermission" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission where f_id=0
+	</select>
+</mapper>

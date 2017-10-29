@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meet.orm.dao.SysUserMapper">
+	<resultMap id="BaseResultMap" type="com.meet.orm.pojo.SysUser">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
+		<result column="active" property="active" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, username, password, datetime, active
+	</sql>
+	<!-- 获取用户权限对应的菜单 -->
+	<select id="findUserMenu" resultMap="permissionMap">
+		select m.* from
+		sys_permission m where m.id in(
+		select DISTINCT(rm.permission_id) from
+		sys_role_permission rm LEFT JOIN
+		sys_user_role ru on
+		ru.role_id=rm.role_id where ru.user_id=#{userId}
+		) meet by m.weight ,id asc
+	</select>
+	<resultMap id="permissionMap" type="com.meet.orm.pojo.SysPermission">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="f_id" property="fId" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="controller_url" property="controllerUrl"
+			jdbcType="VARCHAR" />
+		<result column="weight" property="weight" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!-- 获取用户权限结束 -->
+
+	<!-- 通过用户名获取用户信息 -->
+	<select id="findUserByName" resultMap="userRolePermMap"
+		parameterType="java.lang.String">
+		SELECT * FROM sys_user
+		WHERE
+		username=#{name}
+	</select>
+	<resultMap type="com.meet.orm.pojo.SysUser" id="userRolePermMap"
+		extends="BaseResultMap">
+		<collection property="roles" javaType="List" column="id"
+			select="selectUserRole" />
+	</resultMap>
+	<select id="selectUserRole" resultMap="roleMap" parameterType="java.lang.Integer">
+		select sys_role.* from sys_role join sys_user_role on
+		sys_role.id=sys_user_role.role_id
+		where sys_user_role.user_id=#{id}
+	</select>
+	<resultMap type="com.meet.orm.pojo.SysRole" id="roleMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<collection property="permissions" javaType="List"
+			select="selectRolePermission" column="id" />
+	</resultMap>
+	<select id="selectRolePermission" resultMap="permissionMap"
+		parameterType="java.lang.Integer">
+		select sys_permission.* from sys_permission left join
+		sys_role_permission on
+		sys_permission.id=sys_role_permission.permission_id where
+		sys_role_permission.role_id=#{id}
+	</select>
+	<!-- 通过用户名获取用户信息结束 -->
+
+	<!-- 获取所有用户 -->
+	<select id="findUserListPage" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		roleName ,
+		<include refid="Base_Column_List" />
+		from sys_user su left join (
+		select group_concat(distinct(sr.name))
+		roleName,sur.user_id from sys_role sr,sys_user_role sur where
+		sur.role_id=sr.id GROUP BY sur.user_id) r on r.user_id=su.id
+		<if test="username!=null">
+			where su.username LIKE
+			CONCAT(CONCAT('%',#{username,jdbcType=VARCHAR}),'%')
+		</if>
+		meet by su.id desc
+	</select>
+	<!-- 添加用户 -->
+	<insert id="insertSelective" parameterType="com.meet.orm.pojo.SysUser"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into sys_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="datetime != null">
+				datetime,
+			</if>
+			<if test="active != null">
+				active,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="datetime != null">
+				#{datetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="active != null">
+				#{active,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 刪除用戶 -->
+	<delete id="delUserById" parameterType="int">
+		delete from sys_user
+		where id=#{userId,jdbcType=INTEGER}
+	</delete>
+	<!-- 获取用户根据用户ID -->
+	<select id="selectUserById" parameterType="int" resultMap="OneUserMap">
+		select * from sys_user where id=#{userId,jdbcType=INTEGER}
+	</select>
+	<resultMap type="com.meet.orm.pojo.SysUser" id="OneUserMap"
+		extends="BaseResultMap">
+		<collection property="userRoles" javaType="List" column="id"
+			select="com.meet.orm.dao.SysUserRoleMapper.selectUserRoleByUserId" />
+	</resultMap>
+	<!-- 更新用户 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.SysUser">
+		update sys_user
+		<set>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="active != null">
+				active = #{active,jdbcType=VARCHAR},
+			</if>
+			<if test="datetime != null">
+				datetime = #{datetime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
