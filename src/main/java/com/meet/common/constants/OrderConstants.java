@@ -38,7 +38,7 @@ public class OrderConstants {
 	public static final String SYS_FAILE = "300";
 
 	// 日志名称
-	public static final String LOG_NAME = "order_system";
+	public static final String LOG_NAME = "meet";
 
 	// 用户sessionkey
 	public static final String SESSION_USER_NAME = "userName";

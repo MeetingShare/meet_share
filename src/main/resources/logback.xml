@@ -17,7 +17,7 @@
 	 -->
 	<!-- 演示按时间滚动的策略 -->
 	<appender name="defaultLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logPath}/car.log</file>
+		<file>${logPath}/meet.log</file>
 		
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${logPath}/car.%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -31,7 +31,7 @@
 	</appender>
 	
 	<!-- project default level -->
-	<logger name="order_system" level="${level}" />
+	<logger name="meet" level="${level}" />
 	
 	<logger name="dao" level="DEBUG">
 		daoFILE为实际定义的appender
