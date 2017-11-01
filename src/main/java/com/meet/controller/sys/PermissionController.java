@@ -1,5 +1,6 @@
 package com.meet.controller.sys;
 
+import com.meet.common.constants.MeetConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.meet.common.constants.OrderConstants;
 import com.meet.common.resources.Resources;
 import com.meet.controller.BaseController;
 import com.meet.dto.req.sys.SysPermissionInfoReq;
@@ -55,12 +55,12 @@ public class PermissionController extends BaseController {
 		ApiResponse response = new ApiResponse();
 		try {
 			permissionService.addPermission(permissionReq);
-			response.setCode(OrderConstants.SYS_SUCCESS);
+			response.setCode(MeetConstants.SYS_SUCCESS);
 			response.setMsg(Resources.getMessage("permiss_add_success"));
 		} catch (Exception e) {
 			logger.error("權限添加失败:{}", e.getMessage());
 			e.printStackTrace();
-			response.setCode(OrderConstants.SYS_FAILE);
+			response.setCode(MeetConstants.SYS_FAILE);
 			response.setMsg(e.getMessage());
 		}
 		return response;
@@ -83,12 +83,12 @@ public class PermissionController extends BaseController {
 		ApiResponse response = new ApiResponse();
 		try {
 			permissionService.updatePermission(permissionReq);
-			response.setCode(OrderConstants.SYS_SUCCESS);
+			response.setCode(MeetConstants.SYS_SUCCESS);
 			response.setMsg(Resources.getMessage("permiss_edit_success"));
 		} catch (Exception e) {
 			logger.error("權限系统失败:{}", e.getMessage());
 			e.printStackTrace();
-			response.setCode(OrderConstants.SYS_FAILE);
+			response.setCode(MeetConstants.SYS_FAILE);
 			response.setMsg(e.getMessage());
 		}
 		return response;
@@ -102,12 +102,12 @@ public class PermissionController extends BaseController {
 		ApiResponse response = new ApiResponse();
 		try {
 			permissionService.delPermission(id);
-			response.setCode(OrderConstants.SYS_SUCCESS);
+			response.setCode(MeetConstants.SYS_SUCCESS);
 			response.setMsg(Resources.getMessage("permiss_del_success"));
 		} catch (Exception e) {
 			logger.error("權限删除失败:{}", e.getMessage());
 			e.printStackTrace();
-			response.setCode(OrderConstants.SYS_FAILE);
+			response.setCode(MeetConstants.SYS_FAILE);
 			response.setMsg(e.getMessage());
 		}
 		return response;

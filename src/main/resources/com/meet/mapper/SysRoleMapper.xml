@@ -88,7 +88,7 @@
 				CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%')
 			</if>
 		</where>
-		meet by id desc
+		order by id desc
 	</select>
 	<!-- 通过角色名称获取角色信息 -->
 	<select id="selectByName" parameterType="java.lang.String"

@@ -129,7 +129,7 @@
 				CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%')
 			</if>
 		</where>
-		meet by weight asc, id desc
+		order by weight asc, id desc
 	</select>
 	<!-- 通过角色名称获取资源信息 -->
 	<select id="selectByNameAndFId" resultMap="BaseResultMap">

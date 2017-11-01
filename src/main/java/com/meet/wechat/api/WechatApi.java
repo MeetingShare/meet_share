@@ -1,7 +1,7 @@
 package com.meet.wechat.api;
 
 import com.alibaba.fastjson.JSON;
-import com.meet.common.constants.OrderConstants;
+import com.meet.common.constants.MeetConstants;
 import com.meet.wechat.client.LocalHttpClient;
 import com.meet.wechat.common.MapUtil;
 import com.meet.wechat.common.SignatureUtil;
@@ -48,8 +48,8 @@ public class WechatApi {
 	 * @return
 	 */
 	public static SnsToken oauth2AccessToken(String code) {
-		HttpUriRequest httpUriRequest = RequestBuilder.post().setUri(OrderConstants.WECHAT_URL + "sns/oauth2/access_token").addParameter("appid", OrderConstants.WECHAT_APPID)
-				.addParameter("secret", OrderConstants.WECHAT_SECRET).addParameter("code", code).addParameter("grant_type", "authorization_code").build();
+		HttpUriRequest httpUriRequest = RequestBuilder.post().setUri(MeetConstants.WECHAT_URL + "sns/oauth2/access_token").addParameter("appid", MeetConstants.WECHAT_APPID)
+				.addParameter("secret", MeetConstants.WECHAT_SECRET).addParameter("code", code).addParameter("grant_type", "authorization_code").build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest, SnsToken.class);
 	}
 
@@ -61,8 +61,8 @@ public class WechatApi {
 	 * @return
 	 */
 	public static Token token() {
-		HttpUriRequest httpUriRequest = RequestBuilder.get().setUri(OrderConstants.WECHAT_URL + "cgi-bin/token").addParameter("grant_type", "client_credential")
-				.addParameter("appid", OrderConstants.WECHAT_APPID).addParameter("secret", OrderConstants.WECHAT_SECRET).build();
+		HttpUriRequest httpUriRequest = RequestBuilder.get().setUri(MeetConstants.WECHAT_URL + "cgi-bin/token").addParameter("grant_type", "client_credential")
+				.addParameter("appid", MeetConstants.WECHAT_APPID).addParameter("secret", MeetConstants.WECHAT_SECRET).build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest, Token.class);
 	}
 	/**
@@ -74,7 +74,7 @@ public class WechatApi {
 	 */
 	public static User userinfo(String access_token, String openid, String lang){
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
-				.setUri(OrderConstants.WECHAT_URL + "/sns/userinfo")
+				.setUri(MeetConstants.WECHAT_URL + "/sns/userinfo")
 				.addParameter("access_token", access_token)
 				.addParameter("openid", openid)
 				.addParameter("lang", lang)
@@ -104,7 +104,7 @@ public class WechatApi {
 	 * @return
 	 */
 	public static BaseResult menuCreate(String access_token, String menuJson) {
-		HttpUriRequest httpUriRequest = RequestBuilder.post().setHeader(jsonHeader).setUri(OrderConstants.WECHAT_URL + "cgi-bin/menu/create")
+		HttpUriRequest httpUriRequest = RequestBuilder.post().setHeader(jsonHeader).setUri(MeetConstants.WECHAT_URL + "cgi-bin/menu/create")
 				.addParameter("access_token", access_token).setEntity(new StringEntity(menuJson, Charset.forName("utf-8"))).build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest, BaseResult.class);
 	}
@@ -129,7 +129,7 @@ public class WechatApi {
 	 * @return
 	 */
 	public static Menu menuGet(String access_token) {
-		HttpUriRequest httpUriRequest = RequestBuilder.post().setUri(OrderConstants.WECHAT_URL + "/cgi-bin/menu/get").addParameter("access_token", access_token).build();
+		HttpUriRequest httpUriRequest = RequestBuilder.post().setUri(MeetConstants.WECHAT_URL + "/cgi-bin/menu/get").addParameter("access_token", access_token).build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest, Menu.class);
 	}
 
@@ -140,7 +140,7 @@ public class WechatApi {
 	 * @return
 	 */
 	public static BaseResult menuDelete(String access_token) {
-		HttpUriRequest httpUriRequest = RequestBuilder.post().setUri(OrderConstants.WECHAT_URL + "cgi-bin/menu/delete").addParameter("access_token", access_token).build();
+		HttpUriRequest httpUriRequest = RequestBuilder.post().setUri(MeetConstants.WECHAT_URL + "cgi-bin/menu/delete").addParameter("access_token", access_token).build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest, BaseResult.class);
 	}
 
@@ -158,7 +158,7 @@ public class WechatApi {
 			unifiedorder.setSign(sign);
 		}
 		String unifiedorderXML = XMLConverUtil.convertToXML(unifiedorder);
-		HttpUriRequest httpUriRequest = RequestBuilder.post().setHeader(xmlHeader).setUri(OrderConstants.WECHAT_PAY_URL + "/pay/unifiedorder")
+		HttpUriRequest httpUriRequest = RequestBuilder.post().setHeader(xmlHeader).setUri(MeetConstants.WECHAT_PAY_URL + "/pay/unifiedorder")
 				.setEntity(new StringEntity(unifiedorderXML, Charset.forName("utf-8"))).build();
 		return LocalHttpClient.executeXmlResult(httpUriRequest, UnifiedorderResult.class);
 	}
@@ -174,7 +174,7 @@ public class WechatApi {
 	 */
 	private static QrcodeTicket qrcodeCreate(String access_token, String qrcodeJson) {
 		System.out.println(qrcodeJson);
-		HttpUriRequest httpUriRequest = RequestBuilder.post().setHeader(jsonHeader).setUri(OrderConstants.WECHAT_URL + "cgi-bin/qrcode/create")
+		HttpUriRequest httpUriRequest = RequestBuilder.post().setHeader(jsonHeader).setUri(MeetConstants.WECHAT_URL + "cgi-bin/qrcode/create")
 				.addParameter("access_token", access_token).setEntity(new StringEntity(qrcodeJson, Charset.forName("utf-8"))).build();
 		return LocalHttpClient.executeJsonResult(httpUriRequest, QrcodeTicket.class);
 	}
@@ -208,7 +208,7 @@ public class WechatApi {
 		String messageJson = JSON.toJSONString(templateMessage);
 		HttpUriRequest httpUriRequest = RequestBuilder.post()
 				.setHeader(jsonHeader)
-				.setUri(OrderConstants.WECHAT_URL+"/cgi-bin/message/template/send")
+				.setUri(MeetConstants.WECHAT_URL+"/cgi-bin/message/template/send")
 				.addParameter("access_token", access_token)
 				.setEntity(new StringEntity(messageJson,Charset.forName("utf-8")))
 				.build();

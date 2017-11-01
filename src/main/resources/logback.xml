@@ -38,7 +38,7 @@
 	</logger>
 	
 	<!-- root -->
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="console" />
 		<appender-ref ref="defaultLogFile" />
 		<!--<appender-ref ref="syslog" /> -->

@@ -13,18 +13,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.meet.common.constants.OrderConstants;
+import com.meet.common.constants.MeetConstants;
 import com.meet.exception.BusinessException;
 
 public class BaiduClient {
-	private static Logger logger = LoggerFactory.getLogger(OrderConstants.LOG_NAME);
+	private static Logger logger = LoggerFactory.getLogger(MeetConstants.LOG_NAME);
 	private static String REQ_URL = "http://api.map.baidu.com/geocoder/v2/?address=%s&output=json&ak=42d35fc1c384079a55f6cd1eeb0b7715&callback=showLocation";
 
 	public static BaiduResponse reqBaiduGetLanAndLgn(String address) throws BusinessException {
 		String returnJson=null;
 		try {
 			HttpClient client = new DefaultHttpClient();
-			String reqUrl = String.format(REQ_URL, URLEncoder.encode(address, OrderConstants.DEFAULT_ENCODING));
+			String reqUrl = String.format(REQ_URL, URLEncoder.encode(address, MeetConstants.DEFAULT_ENCODING));
 			logger.info("获取店铺地址坐标:{}", reqUrl);
 			HttpGet get = new HttpGet(reqUrl);
 			HttpResponse response = client.execute(get);

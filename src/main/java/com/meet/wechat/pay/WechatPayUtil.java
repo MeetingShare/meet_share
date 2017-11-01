@@ -10,7 +10,7 @@
 //
 //import com.alibaba.fastjson.JSON;
 //import com.meet.common.CommonUtils;
-//import com.meet.common.constants.OrderConstants;
+//import com.meet.common.constants.MeetConstants;
 //import com.meet.common.date.DateUtil;
 //import com.meet.exception.BusinessException;
 //import com.meet.orm.service.api.ApiReqWechatLogService;
@@ -23,7 +23,7 @@
 //
 //@Component
 //public class WechatPayUtil {
-//	private Logger logger = LoggerFactory.getLogger(OrderConstants.LOG_NAME);
+//	private Logger logger = LoggerFactory.getLogger(MeetConstants.LOG_NAME);
 //
 //	@Autowired
 //	private ApiReqWechatLogService apiReqWechatLogService;
@@ -48,14 +48,14 @@
 //		// 这里notify_url是 支付完成后微信发给该链接信息，可以判断会员是否支付成功，改变订单状态等。
 //		String trade_type = "JSAPI";
 //		Unifiedorder unifiedorder = new Unifiedorder();
-//		unifiedorder.setAppid(OrderConstants.WECHAT_APPID);
-//		unifiedorder.setMch_id(OrderConstants.WECHAT_MACHID);
+//		unifiedorder.setAppid(MeetConstants.WECHAT_APPID);
+//		unifiedorder.setMch_id(MeetConstants.WECHAT_MACHID);
 //		unifiedorder.setNonce_str(nonce_str);
 //		unifiedorder.setBody(body);
 //		unifiedorder.setOut_trade_no(orderNo);
 //		unifiedorder.setTotal_fee(Integer.parseInt(finalmoney) + "");// 单位分
 //		unifiedorder.setSpbill_create_ip(spbill_create_ip);// IP
-//		unifiedorder.setNotify_url(String.format(OrderConstants.WECHAT_PAY_NOTIFY_URL,orderNo, type));
+//		unifiedorder.setNotify_url(String.format(MeetConstants.WECHAT_PAY_NOTIFY_URL,orderNo, type));
 //		unifiedorder.setTrade_type(trade_type);// JSAPI，NATIVE，APP，WAP
 //		unifiedorder.setOpenid(openid);
 //		// 保存请求第三方数据
@@ -67,7 +67,7 @@
 //		} catch (Exception e) {
 //			logger.error("插入日期错误,不影响后续操作：{}", e.getMessage());
 //		}
-//		UnifiedorderResult unifiedorderResult = WechatApi.payUnifiedorder(unifiedorder, OrderConstants.WECHAT_PARTNERKEY);
+//		UnifiedorderResult unifiedorderResult = WechatApi.payUnifiedorder(unifiedorder, MeetConstants.WECHAT_PARTNERKEY);
 //		long reqCostTime = System.currentTimeMillis() - startTime;
 //		logger.info("调用微信总耗时：{}", reqCostTime);
 //		String respText = JSON.toJSONString(unifiedorderResult);
@@ -81,7 +81,7 @@
 //		} catch (Exception e) {
 //			logger.error("更新日期错误,不影响后续操作：{}", e.getMessage());
 //		}
-//		return generateMchPayJsRequest(unifiedorderResult.getPrepay_id(), OrderConstants.WECHAT_APPID, OrderConstants.WECHAT_PARTNERKEY);
+//		return generateMchPayJsRequest(unifiedorderResult.getPrepay_id(), MeetConstants.WECHAT_APPID, MeetConstants.WECHAT_PARTNERKEY);
 //
 //	}
 //

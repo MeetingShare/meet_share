@@ -1,10 +1,11 @@
 package com.meet.common.resources;
 
+import com.meet.common.constants.MeetConstants;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.meet.common.constants.OrderConstants;
 
 /**
  * PropKit. PropKit can load properties file from CLASSPATH or File object.
@@ -21,7 +22,7 @@ public class PropKit {
 	 * @see #use(String, String)
 	 */
 	public static Prop use(String fileName) {
-		return use(fileName, OrderConstants.DEFAULT_ENCODING);
+		return use(fileName, MeetConstants.DEFAULT_ENCODING);
 	}
 	
 	/**
@@ -62,7 +63,7 @@ public class PropKit {
 	 * @see #use(File, String)
 	 */
 	public static Prop use(File file) {
-		return use(file, OrderConstants.DEFAULT_ENCODING);
+		return use(file, MeetConstants.DEFAULT_ENCODING);
 	}
 	
 	/**

@@ -2,8 +2,8 @@ package com.meet.orm.service.impl.sys;
 
 import java.util.List;
 
+import com.meet.common.Md5Util;
 import org.apache.commons.lang.StringUtils;
-import org.apache.taglibs.standard.resources.Resources;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,27 +51,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public SysUser saveUser(SysUserInfoReq userInfo) throws Exception {
 		// TODO Auto-generated method stub
-		if (!userInfo.getPassword().equals(userInfo.getRepassword())) {
-			throw new SystemException(Resources.getMessage("user_add_pass_error"));
-		}
-		if (userInfo.getRoleId() == null || userInfo.getRoleId().length <= 0) {
-			throw new SystemException(Resources.getMessage("user_add_not_role"));
-		}
 		// 验证用户是否存在
 		if (findUserByName(userInfo.getUsername()) != null) {
-			throw new SystemException(Resources.getMessage("user_add_exit"));
+			throw new SystemException("用户已存在！");
 		}
 		// 保存用户信息
 		SysUser user = new SysUser();
-		BeanUtils.copyProperties(userInfo, user);
+		user.setUsername(userInfo.getUsername());
+		user.setPassword(Md5Util.md5Encode(userInfo.getPassword()));
 		userDao.insertSelective(user);
-		// 保存用户角色
-		for (int roleId : userInfo.getRoleId()) {
-			SysUserRole userRole = new SysUserRole();
-			userRole.setRoleId(roleId);
-			userRole.setUserId(user.getId());
-			userRoleMapper.insertSelective(userRole);
-		}
 		return user;
 	}
 
@@ -93,28 +81,18 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(SysUserInfoReq userInfo) throws Exception {
 		// TODO Auto-generated method stub
 		if (StringUtils.isEmpty(userInfo.getUserId())) {
-			throw new SystemException(Resources.getMessage("user_edit_fail"));
-		}
-		if (!userInfo.getPassword().equals(userInfo.getRepassword())) {
-			throw new SystemException(Resources.getMessage("user_edit_pass_error"));
-		}
-		if (userInfo.getRoleId() == null || userInfo.getRoleId().length <= 0) {
-			throw new SystemException(Resources.getMessage("user_edit_not_role"));
+			throw new SystemException("用户ID为空！");
 		}
 		// 更新用户信息
 		SysUser user = new SysUser();
-		BeanUtils.copyProperties(userInfo, user);
 		user.setId(Integer.parseInt(userInfo.getUserId()));
-		userDao.updateByPrimaryKeySelective(user);
-		// 先删除用户角色
-		userRoleMapper.deleteUserRoleByUserId(user.getId());
-		// 保存用户角色
-		for (int roleId : userInfo.getRoleId()) {
-			SysUserRole userRole = new SysUserRole();
-			userRole.setRoleId(roleId);
-			userRole.setUserId(user.getId());
-			userRoleMapper.insertSelective(userRole);
+		if(StringUtils.isNotEmpty(userInfo.getPassword())) {
+			user.setPassword(Md5Util.md5Encode(userInfo.getPassword()));
 		}
+		if(StringUtils.isNotEmpty(userInfo.getActive())){
+			user.setActive(userInfo.getActive());
+		}
+		userDao.updateByPrimaryKeySelective(user);
 	}
 
 	@Override
@@ -124,6 +102,29 @@ public class UserServiceImpl implements UserService {
 		BeanUtils.copyProperties(userInfo, user);
 		user.setId(Integer.parseInt(userInfo.getUserId()));
 		userDao.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public void setRole(SysUserInfoReq userInfo) throws Exception {
+		if (StringUtils.isEmpty(userInfo.getUserId())) {
+			throw new SystemException("用户ID为空！");
+		}
+		SysUser user=selectUserByUserId(Integer.parseInt(userInfo.getUserId()));
+		if(user==null){
+			throw new SystemException("用户不存在");
+		}
+		if(userInfo.getRoleIds()==null&&userInfo.getRoleIds().length<=0){
+			throw new SystemException("角色不能为空");
+		}
+		// 先删除用户角色
+		userRoleMapper.deleteUserRoleByUserId(user.getId());
+		// 保存用户角色
+		for (String roleId : userInfo.getRoleIds()) {
+			SysUserRole userRole = new SysUserRole();
+			userRole.setRoleId(Integer.parseInt(roleId));
+			userRole.setUserId(user.getId());
+			userRoleMapper.insertSelective(userRole);
+		}
 	}
 
 }

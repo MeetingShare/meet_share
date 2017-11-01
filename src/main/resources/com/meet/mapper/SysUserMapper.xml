@@ -9,7 +9,7 @@
 		<result column="active" property="active" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, username, password, datetime, active
+		id, username, datetime, active
 	</sql>
 	<!-- 获取用户权限对应的菜单 -->
 	<select id="findUserMenu" resultMap="permissionMap">
@@ -74,11 +74,11 @@
 		select group_concat(distinct(sr.name))
 		roleName,sur.user_id from sys_role sr,sys_user_role sur where
 		sur.role_id=sr.id GROUP BY sur.user_id) r on r.user_id=su.id
-		<if test="username!=null">
+		<if test="username!=null and username!=''">
 			where su.username LIKE
 			CONCAT(CONCAT('%',#{username,jdbcType=VARCHAR}),'%')
 		</if>
-		meet by su.id desc
+		order by su.id desc
 	</select>
 	<!-- 添加用户 -->
 	<insert id="insertSelective" parameterType="com.meet.orm.pojo.SysUser"
@@ -126,7 +126,7 @@
 	</delete>
 	<!-- 获取用户根据用户ID -->
 	<select id="selectUserById" parameterType="int" resultMap="OneUserMap">
-		select * from sys_user where id=#{userId,jdbcType=INTEGER}
+		select <include refid="Base_Column_List" /> from sys_user where id=#{userId,jdbcType=INTEGER}
 	</select>
 	<resultMap type="com.meet.orm.pojo.SysUser" id="OneUserMap"
 		extends="BaseResultMap">

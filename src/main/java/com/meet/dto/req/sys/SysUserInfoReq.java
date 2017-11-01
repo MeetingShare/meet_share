@@ -10,12 +10,10 @@ public class SysUserInfoReq extends SysRequest{
     private String username;
     //用户密码
     private String password;
-    //确认密码
-    private String repassword;
     //状态
     private String active;
     //角色Id
-    private int[] roleId;
+    private String[] roleIds;
     //用户编号
     private String userId;
 }

@@ -1,13 +1,9 @@
 package com.meet.common.resources;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Properties;
+import com.meet.common.constants.MeetConstants;
 
-import com.meet.common.constants.OrderConstants;
+import java.io.*;
+import java.util.Properties;
 
 /**
  * 读取配置文件
@@ -22,7 +18,7 @@ public class Prop {
 	 * @see #Prop(String, String)
 	 */
 	public Prop(String fileName) {
-		this(fileName,OrderConstants.DEFAULT_ENCODING);
+		this(fileName, MeetConstants.DEFAULT_ENCODING);
 	}
 	
 	/**
@@ -59,7 +55,7 @@ public class Prop {
 	 * @see #Prop(File, String)
 	 */
 	public Prop(File file) {
-		this(file, OrderConstants.DEFAULT_ENCODING);
+		this(file, MeetConstants.DEFAULT_ENCODING);
 	}
 	
 	/**

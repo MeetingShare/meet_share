@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
+import com.meet.common.constants.MeetConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.meet.common.CommonUtils;
-import com.meet.common.constants.OrderConstants;
 
 
 /**
@@ -27,8 +24,8 @@ import com.meet.common.constants.OrderConstants;
  *
  */
 public abstract class BaseController {
-	protected static Logger logger = LoggerFactory.getLogger(OrderConstants.LOG_NAME);
-	
+	protected static Logger logger = LoggerFactory.getLogger(MeetConstants.LOG_NAME);
+
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 	protected HttpSession session;
@@ -49,7 +46,7 @@ public abstract class BaseController {
 
 	/**
 	 * 获取参数转int
-	 * 
+	 *
 	 * @param name
 	 * @param defaultValue
 	 * @return
@@ -79,21 +76,9 @@ public abstract class BaseController {
 		return Integer.parseInt(value);
 	}
 
-	public Object getShiroSession(Object key) {
-		Subject currentUser = SecurityUtils.getSubject();
-		Object sessionValue = "";
-		if (null != currentUser) {
-			Session session = currentUser.getSession();
-			if (null != session) {
-				sessionValue = session.getAttribute("userId");
-			}
-		}
-		return sessionValue;
-	}
-	
 	/**
 	 * 获取流参数值
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 * @throws IOException
@@ -115,16 +100,16 @@ public abstract class BaseController {
 	}
 	/**
 	 * 获取调用方IP地址
-	 * 
+	 *
 	 * @return
 	 */
 	protected String getIpAddr() {
 		return request.getRemoteHost();
 	}
-	
+
 	/**
 	 * 返回信息到业务系统
-	 * 
+	 *
 	 * @param rspXml
 	 * @param response
 	 */

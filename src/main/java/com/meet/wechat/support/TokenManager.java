@@ -1,6 +1,6 @@
 package com.meet.wechat.support;
 
-import com.meet.common.constants.OrderConstants;
+import com.meet.common.constants.MeetConstants;
 import com.meet.wechat.api.WechatApi;
 import com.meet.wechat.pojo.token.Token;
 import org.apache.commons.lang.StringUtils;
@@ -31,7 +31,7 @@ public class TokenManager {
 			Token token = WechatApi.token();
 			if(token.getExpires_in()!=null)
 				expiredTime = System.currentTimeMillis() + ((token.getExpires_in() -5) * 1000);
-			tokenMap.put(OrderConstants.WECHAT_APPID, token.getAccess_token());
+			tokenMap.put(MeetConstants.WECHAT_APPID, token.getAccess_token());
 		} else {
 			log.info("access_token 存在值");
 		}

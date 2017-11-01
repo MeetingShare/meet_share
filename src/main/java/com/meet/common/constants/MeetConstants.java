@@ -6,7 +6,7 @@ import com.meet.common.resources.PropKit;
 /**
  * 系统常亮 Created by bzhx on 2017年3月9日 上午11:28:47
  */
-public class OrderConstants {
+public class MeetConstants {
 
 	private static Prop prop;
 	static {
@@ -34,8 +34,8 @@ public class OrderConstants {
 	/**
 	 * 返回状态吗
 	 */
-	public static final String SYS_SUCCESS = "200";
-	public static final String SYS_FAILE = "300";
+	public static final String SYS_SUCCESS = "S";
+	public static final String SYS_FAILE = "F";
 
 	// 日志名称
 	public static final String LOG_NAME = "meet";
@@ -54,7 +54,7 @@ public class OrderConstants {
 	public static final String IMAGE_URL = prop.get("image.url");
 	// 图片上传绝对路径
 	public static final String IMAGE_PATH = prop.get("image.path");
-	
+
 	/**
 	 * 短信验证配置
 	 */
@@ -70,7 +70,7 @@ public class OrderConstants {
 	public static final String SMS_SIGNNAME=prop.get("sms_signname");
 	//host
 	public static final String SMS_TOPIC=prop.get("sms_topic");
-	
+
 	/**
 	 * 微信相关配置
 	 */
@@ -79,7 +79,7 @@ public class OrderConstants {
 	public static final String WECHAT_SECRET=prop.get("wechat_secret");
 	public static final String WECHAT_TOKEN=prop.get("wechat_token");
 	public static final String WECHAT_URL=prop.get("wechat_url");
-	
+
 	//商户号
 	public static final String WECHAT_MACHID=prop.get("wechat_mchid");
 	//商户key
@@ -90,7 +90,7 @@ public class OrderConstants {
 	public static final String WECHAT_PAY_NOTIFY_URL=prop.get("wechat_pay_notify_url");
 	//网页授权获取code地址
 	public static final String WECHAT_OPEN_URL=prop.get("wechat_open_url");
-	
+
 	//openid存在在本地
 	public static final String WECHAT_OPEN_ID="open_id";
 	

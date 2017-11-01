@@ -8,7 +8,7 @@ import com.aliyun.mns.model.BatchSmsAttributes;
 import com.aliyun.mns.model.MessageAttributes;
 import com.aliyun.mns.model.RawTopicMessage;
 import com.aliyun.mns.model.TopicMessage;
-import com.meet.common.constants.OrderConstants;
+import com.meet.common.constants.MeetConstants;
 import com.meet.exception.BusinessException;
 
 /**
@@ -21,9 +21,9 @@ public class SMUtil {
 		/**
 		 *  Step 1. 获取主题引用
 		 */
-	        CloudAccount account = new CloudAccount(OrderConstants.SMS_API_KEY,OrderConstants.SMS_SECRET_KEY, OrderConstants.SMS_ENDPOINT);
+	        CloudAccount account = new CloudAccount(MeetConstants.SMS_API_KEY, MeetConstants.SMS_SECRET_KEY, MeetConstants.SMS_ENDPOINT);
 	        MNSClient client = account.getMNSClient();
-	        CloudTopic topic = client.getTopicRef(OrderConstants.SMS_TOPIC);
+	        CloudTopic topic = client.getTopicRef(MeetConstants.SMS_TOPIC);
 	        /**
 	         * Step 2. 设置SMS消息体（必须）
 	         *
@@ -37,9 +37,9 @@ public class SMUtil {
 	        MessageAttributes messageAttributes = new MessageAttributes();
 	        BatchSmsAttributes batchSmsAttributes = new BatchSmsAttributes();
 	        // 3.1 设置发送短信的签名（SMSSignName）
-	        batchSmsAttributes.setFreeSignName(OrderConstants.SMS_SIGNNAME);
+	        batchSmsAttributes.setFreeSignName(MeetConstants.SMS_SIGNNAME);
 	        // 3.2 设置发送短信使用的模板（SMSTempateCode）
-	        batchSmsAttributes.setTemplateCode(OrderConstants.SMS_TEMPLATE_ID);
+	        batchSmsAttributes.setTemplateCode(MeetConstants.SMS_TEMPLATE_ID);
 	        // 3.3 设置发送短信所使用的模板中参数对应的值（在短信模板中定义的，没有可以不用设置）
 	        batchSmsAttributes.setType("singleContent");
 	        

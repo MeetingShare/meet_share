@@ -5,7 +5,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-import com.meet.common.constants.OrderConstants;
+import com.meet.common.constants.MeetConstants;
 import com.meet.exception.BusinessException;
 import lombok.Data;
 import net.coobird.thumbnailator.Thumbnails;
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  */
 @Data
 public class ImgCompress {
-	private Logger log = LoggerFactory.getLogger(OrderConstants.LOG_NAME);
+	private Logger log = LoggerFactory.getLogger(MeetConstants.LOG_NAME);
 	private static int IMAGE_SIZE = 1280;
 	private Image img;
 	private int width;

@@ -32,7 +32,7 @@ public interface UserService {
 	/**
 	 * 获取用户列表
 	 * 
-	 * @param userBean
+	 * @param userInfo
 	 * @return
 	 */
 	PageInfo<SysUser> findUserListPage(SysUserInfoReq userInfo);
@@ -40,7 +40,7 @@ public interface UserService {
 	/**
 	 * 添加用户
 	 * 
-	 * @param user
+	 * @param userInfo
 	 * @return
 	 * @throws Exception
 	 */
@@ -70,4 +70,11 @@ public interface UserService {
 	 */
 	@Transactional(rollbackFor=Exception.class)
 	void editPass(SysUserInfoReq userInfo) throws Exception;
+
+	/**
+	 * 设置角色
+	 * @param userInfo
+	 * @throws Exception
+	 */
+	void setRole(SysUserInfoReq userInfo)throws Exception;
 }

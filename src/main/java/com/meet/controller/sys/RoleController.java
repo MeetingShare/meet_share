@@ -1,5 +1,6 @@
 package com.meet.controller.sys;
 
+import com.meet.common.constants.MeetConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.meet.common.constants.OrderConstants;
 import com.meet.common.resources.Resources;
 import com.meet.controller.BaseController;
 import com.meet.dto.req.sys.SysRoleInfoReq;
@@ -51,12 +51,12 @@ public class RoleController extends BaseController {
 		ApiResponse response = new ApiResponse();
 		try {
 			roleService.addRole(roleReq);
-			response.setCode(OrderConstants.SYS_SUCCESS);
+			response.setCode(MeetConstants.SYS_SUCCESS);
 			response.setMsg(Resources.getMessage("role_add_success"));
 		} catch (Exception e) {
 			logger.error("角色添加失败:{}", e.getMessage());
 			e.printStackTrace();
-			response.setCode(OrderConstants.SYS_FAILE);
+			response.setCode(MeetConstants.SYS_FAILE);
 			response.setMsg(e.getMessage());
 		}
 		return response;
@@ -71,12 +71,12 @@ public class RoleController extends BaseController {
 		ApiResponse response = new ApiResponse();
 		try {
 			roleService.delRole(id);
-			response.setCode(OrderConstants.SYS_SUCCESS);
+			response.setCode(MeetConstants.SYS_SUCCESS);
 			response.setMsg(Resources.getMessage("role_del_success"));
 		} catch (Exception e) {
 			logger.error("角色删除失败:{}", e.getMessage());
 			e.printStackTrace();
-			response.setCode(OrderConstants.SYS_FAILE);
+			response.setCode(MeetConstants.SYS_FAILE);
 			response.setMsg(e.getMessage());
 		}
 		return response;
@@ -103,12 +103,12 @@ public class RoleController extends BaseController {
 		ApiResponse response=new ApiResponse();
 		try{
 			roleService.addRolePermission(roleReq);
-			response.setCode(OrderConstants.SYS_SUCCESS);
+			response.setCode(MeetConstants.SYS_SUCCESS);
 			response.setMsg(Resources.getMessage("role_appy_success"));
 		}catch(Exception e){
 			logger.error("分配失败:{}",e.getMessage());
 			e.printStackTrace();
-			response.setCode(OrderConstants.SYS_FAILE);
+			response.setCode(MeetConstants.SYS_FAILE);
 			response.setMsg(e.getMessage());
 		}
 		return response;

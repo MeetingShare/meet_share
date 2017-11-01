@@ -8,9 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		classpath:config/spring/spring-mybatis.xml;
-		classpath:config/spring/spring-shiro.xml;
 		classpath:config/spring/spring-cache.xml;
-		classpath:config/spring/spring-quartz.xml
 		</param-value>
 	</context-param>
   <filter>
@@ -24,18 +22,6 @@
   </filter>
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-   <filter>
-    <filter-name>shiroFilter</filter-name>
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    <init-param>
-      <param-name>targetFilterLifecycle</param-name>
-      <param-value>true</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>shiroFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <listener>

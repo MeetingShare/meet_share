@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
     @RequestMapping("/captchat")  
     public void getVerifyCodeImage(HttpServletResponse response) throws IOException {  
     	CaptchaRender img = new CaptchaRender(4);
-		this.setSessionAttr(CaptchaRender.DEFAULT_CAPTCHA_MD5_CODE_KEY, img.getMd5RandonCode()); 
+		this.setSessionAttr(CaptchaRender.DEFAULT_CAPTCHA_MD5_CODE_KEY, img.getMd5RandonCode());
         img.render(response);
     }  
        

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.meet.common.constants.MeetConstants;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -13,11 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.meet.common.constants.OrderConstants;
 
 public class JsonResponseHandler{
 	
-	private static Logger logger=LoggerFactory.getLogger(OrderConstants.LOG_NAME);
+	private static Logger logger=LoggerFactory.getLogger(MeetConstants.LOG_NAME);
 
 	private static Map<String, ResponseHandler<?>> map = new HashMap<String, ResponseHandler<?>>();
 
