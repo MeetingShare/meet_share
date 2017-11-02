@@ -1,15 +1,7 @@
 package com.meet.orm.service.impl.sys;
 
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.meet.common.resources.Resources;
 import com.meet.dto.req.sys.SysRoleInfoReq;
 import com.meet.exception.SystemException;
 import com.meet.orm.dao.SysPermissionMapper;
@@ -20,6 +12,12 @@ import com.meet.orm.pojo.SysPermission;
 import com.meet.orm.pojo.SysRole;
 import com.meet.orm.pojo.SysRolePermission;
 import com.meet.orm.service.sys.RoleService;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -53,14 +51,12 @@ public class RoleServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		// 验证名称是否为空
 		if (StringUtils.isEmpty(roleInfo.getName())) {
-			throw new SystemException(
-					Resources.getMessage("role_add_name_null"));
+			throw new SystemException("角色名称为空");
 		}
 		// 验证是否有重复的角色名称a
 		SysRole role = roleMapper.selectByName(roleInfo.getName());
 		if (role != null) {
-			throw new SystemException(
-					Resources.getMessage("role_add_name_exist"));
+			throw new SystemException("角色已经存在");
 		}
 		role = new SysRole();
 		BeanUtils.copyProperties(roleInfo, role);
@@ -90,12 +86,10 @@ public class RoleServiceImpl implements RoleService {
 	public void addRolePermission(SysRoleInfoReq roleInfo) throws Exception {
 		// TODO Auto-generated method stub
 		if (StringUtils.isEmpty(roleInfo.getRoleId())) {
-			throw new SystemException(
-					Resources.getMessage("role_appy_permiss_fail_id"));
+			throw new SystemException("角色ID为空");
 		}
 		if (StringUtils.isEmpty(roleInfo.getModuleIds())) {
-			throw new SystemException(
-					Resources.getMessage("role_appy_permiss_fail_null"));
+			throw new SystemException("权限为空");
 		}
 		// 删除角色对应的所有权限
 		rolePermissMapper.deleteRoleAllPermissionByRoleId(Integer
@@ -108,6 +102,11 @@ public class RoleServiceImpl implements RoleService {
 			rolePermissMapper.insertSelective(record);
 		}
 
+	}
+
+	@Override
+	public SysRole selectByRoleId(Integer roleId) {
+		return roleMapper.selectById(roleId);
 	}
 
 }

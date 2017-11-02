@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import com.meet.orm.pojo.SysPermission;
 
 public interface SysPermissionMapper {
-	int insert(SysPermission record);
 
 	int insertSelective(SysPermission record);
 
@@ -15,7 +14,6 @@ public interface SysPermissionMapper {
 
 	int updateByPrimaryKeySelective(SysPermission record);
 
-	int updateByPrimaryKey(SysPermission record);
 
 	List<SysPermission> selectAll();
 
@@ -24,8 +22,6 @@ public interface SysPermissionMapper {
 	SysPermission selectByNameAndFId(@Param("name") String name,@Param("fId") int fId);
 
 	int delete(Integer id);
-	
-	List<SysPermission> selectByFid(@Param("fId") int fId);
-	
+
 	List<SysPermission>  selectParentPermission();
 }

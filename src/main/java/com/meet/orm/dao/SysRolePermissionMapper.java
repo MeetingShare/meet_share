@@ -5,7 +5,6 @@ import java.util.List;
 import com.meet.orm.pojo.SysRolePermission;
 
 public interface SysRolePermissionMapper {
-    int insert(SysRolePermission record);
 
     int insertSelective(SysRolePermission record);
 
@@ -13,8 +12,7 @@ public interface SysRolePermissionMapper {
 
     int updateByPrimaryKeySelective(SysRolePermission record);
 
-    int updateByPrimaryKey(SysRolePermission record);
-    
+
     List<SysRolePermission> selectRolePermissionByRoleId(int roleId);
     
     int deleteRoleAllPermissionByRoleId(int roleId);

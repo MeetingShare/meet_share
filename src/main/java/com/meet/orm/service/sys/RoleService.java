@@ -48,5 +48,10 @@ public interface RoleService {
 	 */
 	@Transactional(rollbackFor=Exception.class)
 	void addRolePermission(SysRoleInfoReq roleInfo) throws Exception;
+
+	/**
+	 * 获取某个角色信息
+	 */
+	SysRole selectByRoleId(Integer roleId);
 }
 

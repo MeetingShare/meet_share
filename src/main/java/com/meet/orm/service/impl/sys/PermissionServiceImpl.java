@@ -1,25 +1,24 @@
 package com.meet.orm.service.impl.sys;
 
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.meet.common.resources.Resources;
 import com.meet.dto.req.sys.SysPermissionInfoReq;
 import com.meet.exception.SystemException;
 import com.meet.orm.dao.SysPermissionMapper;
 import com.meet.orm.pojo.SysPermission;
 import com.meet.orm.service.sys.PermissionService;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 权限实现 Created by bzhx on 2017年3月17日 下午3:45:00
  */
-@Component
+@Service
 public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
@@ -41,17 +40,16 @@ public class PermissionServiceImpl implements PermissionService {
 		// TODO Auto-generated method stub
 		// 验证name和地址
 		if (StringUtils.isEmpty(permission.getName())) {
-			throw new SystemException(Resources.getMessage("permiss_fail_name"));
+			throw new SystemException("权限名称为空");
 		}
 		if (StringUtils.isEmpty(permission.getControllerUrl())) {
-			throw new SystemException(Resources.getMessage("permiss_fail_url"));
+			throw new SystemException("权限地址为空");
 		}
 		// 验证同一父类是否包含该权限
 		SysPermission record = permissionMapper.selectByNameAndFId(
 				permission.getName(), permission.getFId());
 		if (record != null) {
-			throw new SystemException(
-					Resources.getMessage("permiss_fail_exits"));
+			throw new SystemException("权限已经存在");
 		}
 		record = new SysPermission();
 		BeanUtils.copyProperties(permission, record);
@@ -64,11 +62,10 @@ public class PermissionServiceImpl implements PermissionService {
 		// TODO Auto-generated method stub
 		// 验证name和地址
 		if (StringUtils.isEmpty(permissionInfo.getName())) {
-			throw new SystemException(
-					Resources.getMessage("permiss_ufail_name"));
+			throw new SystemException("权限名称为空");
 		}
 		if (StringUtils.isEmpty(permissionInfo.getControllerUrl())) {
-			throw new SystemException(Resources.getMessage("permiss_ufail_url"));
+			throw new SystemException("权限地址为空");
 		}
 		SysPermission permission = new SysPermission();
 		BeanUtils.copyProperties(permissionInfo, permission);

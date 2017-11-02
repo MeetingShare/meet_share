@@ -1,6 +1,7 @@
 package com.meet.controller.sys;
 
 import com.meet.common.constants.MeetConstants;
+import com.meet.common.log.LogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,69 +16,64 @@ import com.meet.dto.rsp.ApiResponse;
 import com.meet.orm.service.sys.RoleService;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/api/back/role")
 public class RoleController extends BaseController {
 
 	@Autowired
 	private RoleService roleService;
 
 	/**
-	 * 用户列表
+	 * 角色列表
 	 */
-	@RequestMapping("/index")
-	public ModelAndView list(SysRoleInfoReq roleReq) {
+	@RequestMapping("/page_list")
+	@LogAnnotation(module = "角色管理",option = "获取角色列表基于分页")
+	public Object list(SysRoleInfoReq roleReq) {
 		logger.info("访问角色列表");
-		ModelAndView view = new ModelAndView();
-		view.addObject("data", roleService.findRoleListPage(roleReq));
-		view.addObject("reqIno", roleReq.getName());
-		view.setViewName("role/index");
-		return view;
+		ApiResponse resp=new ApiResponse();
+		resp.setCode(MeetConstants.SYS_SUCCESS);
+		resp.setMsg("数据获取成功");
+		resp.setData(roleService.findRoleListPage(roleReq));
+		return resp;
 	}
 
 	/**
-	 * 跳转添加角色页面
-	 */
-	@RequestMapping("/addInfo")
-	public ModelAndView addInfo() {
-		return new ModelAndView("role/add");
-	}
-
-	/**
-	 * 添加用户角色
+	 * 添加角色
 	 */
 	@RequestMapping("/add")
-	public Object save(SysRoleInfoReq roleReq) {
+	@LogAnnotation(module = "角色管理",option = "添加角色")
+	public Object add(SysRoleInfoReq roleReq) {
 		logger.info("添加系统角色：{}", JSON.toJSONString(roleReq));
-		ApiResponse response = new ApiResponse();
+		ApiResponse resp = new ApiResponse();
 		try {
 			roleService.addRole(roleReq);
-			response.setCode(MeetConstants.SYS_SUCCESS);
-			response.setMsg(Resources.getMessage("role_add_success"));
+			resp.setCode(MeetConstants.SYS_SUCCESS);
+			resp.setMsg("角色添加成功");
 		} catch (Exception e) {
 			logger.error("角色添加失败:{}", e.getMessage());
 			e.printStackTrace();
-			response.setCode(MeetConstants.SYS_FAILE);
-			response.setMsg(e.getMessage());
+			resp.setCode(MeetConstants.SYS_FAILE);
+			resp.setMsg(e.getMessage());
 		}
 		return response;
 	}
 
 	/**
-	 * 刪除用戶
+	 * 刪除角色
 	 */
 	@RequestMapping("/del/{id}")
+	@LogAnnotation(module = "角色管理",option = "获取角色")
 	public Object del(@PathVariable("id") int id) {
 		logger.info("刪除角色：{}", id);
-		ApiResponse response = new ApiResponse();
+		ApiResponse resp = new ApiResponse();
 		try {
 			roleService.delRole(id);
-			response.setCode(MeetConstants.SYS_SUCCESS);
-			response.setMsg(Resources.getMessage("role_del_success"));
+			resp.setCode(MeetConstants.SYS_SUCCESS);
+			resp.setMsg("角色删除成功");
 		} catch (Exception e) {
 			logger.error("角色删除失败:{}", e.getMessage());
 			e.printStackTrace();
-			response.setCode(MeetConstants.SYS_FAILE);
-			response.setMsg(e.getMessage());
+			resp.setCode(MeetConstants.SYS_FAILE);
+			resp.setMsg(e.getMessage());
 		}
 		return response;
 	}
@@ -85,31 +81,32 @@ public class RoleController extends BaseController {
 	/**
 	 * 给角色分配权限
 	 */
-	@RequestMapping("/moduleInfo/{id}")
-	public ModelAndView moduleInfo(@PathVariable("id") int id) {
-		ModelAndView view = new ModelAndView();
-		view.addObject("ownModules", roleService.getRolePermission(id));
-		view.addObject("moduleList", roleService.getAllPermission());
-		view.addObject("roleId", id);
-		view.setViewName("role/addRoleModule");
-		return view;
+	@RequestMapping("/info/{id}")
+	@LogAnnotation(module = "角色管理",option = "获取某个角色信息")
+	public Object moduleInfo(@PathVariable("id") int id) {
+		ApiResponse resp=new ApiResponse();
+		resp.setCode(MeetConstants.SYS_SUCCESS);
+		resp.setMsg("数据获取成功");
+		resp.setData(roleService.selectByRoleId(id));
+		return resp;
 	}
 	/**
 	 * 给角色分配权限
 	 */
 	@RequestMapping("/addRoleModule")
+	@LogAnnotation(module = "角色管理",option = "为角色分配权限")
 	public Object addRoleModule(SysRoleInfoReq roleReq) {
 		logger.info("角色分配权限：{}", JSON.toJSONString(roleReq));
-		ApiResponse response=new ApiResponse();
+		ApiResponse resp=new ApiResponse();
 		try{
 			roleService.addRolePermission(roleReq);
-			response.setCode(MeetConstants.SYS_SUCCESS);
-			response.setMsg(Resources.getMessage("role_appy_success"));
+			resp.setCode(MeetConstants.SYS_SUCCESS);
+			resp.setMsg("权限分配成功");
 		}catch(Exception e){
 			logger.error("分配失败:{}",e.getMessage());
 			e.printStackTrace();
-			response.setCode(MeetConstants.SYS_FAILE);
-			response.setMsg(e.getMessage());
+			resp.setCode(MeetConstants.SYS_FAILE);
+			resp.setMsg(e.getMessage());
 		}
 		return response;
 	}

@@ -113,7 +113,11 @@ public class UserServiceImpl implements UserService {
 		if(user==null){
 			throw new SystemException("用户不存在");
 		}
-		if(userInfo.getRoleIds()==null&&userInfo.getRoleIds().length<=0){
+		try {
+			if (userInfo.getRoleIds() == null && userInfo.getRoleIds().length <= 0) {
+				throw new SystemException("角色不能为空");
+			}
+		}catch (NullPointerException e){
 			throw new SystemException("角色不能为空");
 		}
 		// 先删除用户角色

@@ -32,7 +32,6 @@ import java.util.Map;
  * @since 2015-05-05 Pm 20:35
  */
 @Aspect
-@Component
 public class LogAopAction {
     //本地异常日志记录对象
     private static final Logger logger = LoggerFactory.getLogger(LogAopAction.class);

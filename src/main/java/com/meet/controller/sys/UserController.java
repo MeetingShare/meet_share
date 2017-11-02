@@ -23,13 +23,11 @@ public class UserController extends BaseController {
 	
 	@Autowired
 	UserService userService;
-	@Autowired
-	private RoleService roleService;
 
 	/**
 	 * 用户列表
 	 */
-	@RequestMapping("/list")
+	@RequestMapping("/page_list")
 	@LogAnnotation(module = "用户管理",option = "获取用户列表")
 	public Object list(SysUserInfoReq userReq) {
 		logger.info("访问用户列表");
@@ -58,18 +56,18 @@ public class UserController extends BaseController {
 	@LogAnnotation(module = "用户管理",option = "添加用户")
 	public Object add(SysUserInfoReq userInfo){
 		logger.info("添加系統用戶：{}",JSON.toJSONString(userInfo));
-		ApiResponse response=new ApiResponse();
+		ApiResponse resp=new ApiResponse();
 		try{
 			userService.saveUser(userInfo);
-			response.setCode(MeetConstants.SYS_SUCCESS);
-			response.setMsg("用户添加成功");
+			resp.setCode(MeetConstants.SYS_SUCCESS);
+			resp.setMsg("用户添加成功");
 		}catch(Exception e){
 			logger.error("添加用户失败:{}",e.getMessage());
 			e.printStackTrace();
-			response.setCode(MeetConstants.SYS_FAILE);
-			response.setMsg(e.getMessage());
+			resp.setCode(MeetConstants.SYS_FAILE);
+			resp.setMsg(e.getMessage());
 		}
-		return response;
+		return resp;
 	}
 	/**
 	 * 编辑用户
@@ -78,18 +76,18 @@ public class UserController extends BaseController {
 	@LogAnnotation(module = "用户管理",option = "更新用户信息")
 	public Object edit(SysUserInfoReq userInfo){
 		logger.info("更新系統用戶：{}",JSON.toJSONString(userInfo));
-		ApiResponse response=new ApiResponse();
+		ApiResponse resp=new ApiResponse();
 		try{
 			userService.updateUser(userInfo);
-			response.setCode(MeetConstants.SYS_SUCCESS);
-			response.setMsg("用户更新成功");
+			resp.setCode(MeetConstants.SYS_SUCCESS);
+			resp.setMsg("用户更新成功");
 		}catch(Exception e){
 			logger.error("更新用户失败:{}",e.getMessage());
 			e.printStackTrace();
-			response.setCode(MeetConstants.SYS_FAILE);
-			response.setMsg(e.getMessage());
+			resp.setCode(MeetConstants.SYS_FAILE);
+			resp.setMsg(e.getMessage());
 		}
-		return response;
+		return resp;
 	}
 	/**
 	 * 设置角色
@@ -98,18 +96,18 @@ public class UserController extends BaseController {
 	@LogAnnotation(module = "用户管理",option = "为用户设置角色")
 	public Object setRole(SysUserInfoReq userInfo){
 		logger.info("更新系統用戶角色：{}",JSON.toJSONString(userInfo));
-		ApiResponse response=new ApiResponse();
+		ApiResponse resp=new ApiResponse();
 		try{
 			userService.setRole(userInfo);
-			response.setCode(MeetConstants.SYS_SUCCESS);
-			response.setMsg("用戶角色更新成功");
+			resp.setCode(MeetConstants.SYS_SUCCESS);
+			resp.setMsg("用戶角色更新成功");
 		}catch(Exception e){
 			logger.error("更新用戶角色失败:{}",e.getMessage());
 			e.printStackTrace();
-			response.setCode(MeetConstants.SYS_FAILE);
-			response.setMsg(e.getMessage());
+			resp.setCode(MeetConstants.SYS_FAILE);
+			resp.setMsg(e.getMessage());
 		}
-		return response;
+		return resp;
 	}
 	/**
 	 * 刪除用戶
@@ -118,17 +116,17 @@ public class UserController extends BaseController {
 	@LogAnnotation(module = "用户管理",option = "删除用户")
 	public Object del(@PathVariable("id")int id){
 		logger.info("刪除用戶編號：{}",id);
-		ApiResponse response=new ApiResponse();
+		ApiResponse resp=new ApiResponse();
 		try{
 			userService.delUser(id);
-			response.setCode(MeetConstants.SYS_SUCCESS);
-			response.setMsg("用户删除成功");
+			resp.setCode(MeetConstants.SYS_SUCCESS);
+			resp.setMsg("用户删除成功");
 		}catch(Exception e){
 			logger.error("删除用户失败:{}",e.getMessage());
 			e.printStackTrace();
-			response.setCode(MeetConstants.SYS_FAILE);
-			response.setMsg(e.getMessage());
+			resp.setCode(MeetConstants.SYS_FAILE);
+			resp.setMsg(e.getMessage());
 		}
-		return response;
+		return resp;
 	}
 }

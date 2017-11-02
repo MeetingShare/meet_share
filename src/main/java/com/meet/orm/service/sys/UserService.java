@@ -76,5 +76,6 @@ public interface UserService {
 	 * @param userInfo
 	 * @throws Exception
 	 */
+	@Transactional(rollbackFor=Exception.class)
 	void setRole(SysUserInfoReq userInfo)throws Exception;
 }

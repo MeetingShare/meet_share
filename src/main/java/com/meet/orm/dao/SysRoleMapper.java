@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import com.meet.orm.pojo.SysRole;
 
 public interface SysRoleMapper {
-    int insert(SysRole record);
 
     int insertSelective(SysRole record);
 
@@ -15,7 +14,6 @@ public interface SysRoleMapper {
 
     int updateByPrimaryKeySelective(SysRole record);
 
-    int updateByPrimaryKey(SysRole record);
 
 	List<SysRole> getAllRole();
 	
@@ -24,4 +22,6 @@ public interface SysRoleMapper {
 	SysRole selectByName(@Param("name")String name);
 	
 	int delete(Integer id);
+
+    SysRole selectById(Integer id);
 }

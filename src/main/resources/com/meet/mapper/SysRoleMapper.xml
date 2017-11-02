@@ -97,6 +97,21 @@
 		<include refid="Base_Column_List" />
 		from sys_role where name=#{name}
 	</select>
+	<!--获取某个角色详细信息-->
+	<select id="selectById" parameterType="java.lang.Integer" resultMap="permissionMap">
+		select s.* from sys_role s  where s.id=#{id}
+	</select>
+	<resultMap type="com.meet.orm.pojo.SysRole" id="permissionMap"
+			   extends="BaseResultMap">
+		<collection property="permissions" javaType="List" column="id"
+					select="selectRolePermission" />
+	</resultMap>
+	<resultMap id="permissionMap" type="com.meet.orm.pojo.SysPermission">
+		<id column="id" property="id" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="selectRolePermission" parameterType="java.lang.Integer" resultMap="permissionMap">
+		 select permission_id as id from sys_role_permission where role_id = #{id}
+	</select>
 	<!-- 删除角色 -->
 	<delete id="delete" parameterType="int">
 		delete from sys_role

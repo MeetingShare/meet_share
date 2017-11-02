@@ -14,9 +14,6 @@ import com.meet.orm.pojo.SysPermission;
 public interface PermissionService {
 	/**
 	 * 权限列表分页
-	 * @param pageSize
-	 * @param pageNum
-	 * @param nameKey
 	 * @return
 	 */
 	PageInfo<SysPermission> findPermissionListPage(SysPermissionInfoReq permissionReq);
