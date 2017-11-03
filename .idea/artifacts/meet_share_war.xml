@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="meet_share:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="order_system.war">
-      <element id="artifact" artifact-name="meet_share:war exploded" />
-    </root>
-  </artifact>
-</component>
