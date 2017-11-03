@@ -98,10 +98,10 @@
 		from sys_role where name=#{name}
 	</select>
 	<!--获取某个角色详细信息-->
-	<select id="selectById" parameterType="java.lang.Integer" resultMap="permissionMap">
+	<select id="selectById" parameterType="java.lang.Integer" resultMap="rolePermissionMap">
 		select s.* from sys_role s  where s.id=#{id}
 	</select>
-	<resultMap type="com.meet.orm.pojo.SysRole" id="permissionMap"
+	<resultMap type="com.meet.orm.pojo.SysRole" id="rolePermissionMap"
 			   extends="BaseResultMap">
 		<collection property="permissions" javaType="List" column="id"
 					select="selectRolePermission" />

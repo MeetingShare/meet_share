@@ -29,7 +29,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/page_list")
 	@LogAnnotation(module = "用户管理",option = "获取用户列表")
-	public Object list(SysUserInfoReq userReq) {
+	public Object pageList(SysUserInfoReq userReq) {
 		logger.info("访问用户列表");
 		ApiResponse resp = new ApiResponse();
 		resp.setCode(MeetConstants.SYS_SUCCESS);

@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * TokenManager token 自动刷新
- * 
+ *
  * @author baizhixing
  *
  */
@@ -21,9 +21,6 @@ public class TokenManager {
 	private static Long expiredTime;// 正确获取到 access_token 时有值，存放过期时间
 	/**
 	 * 初始化token 刷新，每118分钟刷新一次。
-	 * 
-	 * @param appid
-	 * @param secret
 	 */
 	public static void init() {
 		if (StringUtils.isEmpty(getDefaultToken())||!isAvailable()) {
@@ -46,7 +43,7 @@ public class TokenManager {
 
 	/**
 	 * 获取 access_token
-	 * 
+	 *
 	 * @param appid
 	 * @return
 	 */
@@ -56,7 +53,7 @@ public class TokenManager {
 
 	/**
 	 * 获取第一个appid 的 access_token 适用于单一微信号
-	 * 
+	 *
 	 * @param appid
 	 * @return
 	 */

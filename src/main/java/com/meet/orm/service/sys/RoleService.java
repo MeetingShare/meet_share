@@ -17,8 +17,7 @@ public interface RoleService {
 	List<SysRole> getAllRole();
 	/**
 	 * 获取角色列表
-	 * 
-	 * @param userBean
+	 * @param roleInfo
 	 * @return
 	 */
 	PageInfo<SysRole> findRoleListPage(SysRoleInfoReq roleInfo);
@@ -35,14 +34,6 @@ public interface RoleService {
 	@Transactional(rollbackFor=Exception.class)
 	int delRole(int roleId) throws Exception;
 	
-	/**
-	 * 获取所有权限
-	 */
-	List<SysPermission> getAllPermission();
-	/**
-	 * 获取角色权限
-	 */
-	List<SysRolePermission> getRolePermission(int roleId);
 	/**
 	 * 添加角色分配的权限
 	 */

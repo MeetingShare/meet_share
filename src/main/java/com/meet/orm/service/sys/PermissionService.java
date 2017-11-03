@@ -41,6 +41,12 @@ public interface PermissionService {
 	List<SysPermission> findParentPermission();
 	/**
 	 * 獲取權限基本信息
+	 * @param permissionId
 	 */
 	SysPermission findPermissionById(int permissionId);
+
+	/**
+	 * 获取所有权限
+	 */
+	List<SysPermission> getAllPermission();
 }

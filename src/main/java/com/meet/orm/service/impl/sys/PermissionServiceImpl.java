@@ -90,4 +90,8 @@ public class PermissionServiceImpl implements PermissionService {
 		permissionMapper.delete(permissionId);
 	}
 
+	@Override
+	public List<SysPermission> getAllPermission() {
+		return permissionMapper.selectAll();
+	}
 }

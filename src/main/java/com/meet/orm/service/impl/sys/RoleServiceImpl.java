@@ -68,27 +68,13 @@ public class RoleServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		return roleMapper.delete(roleId);
 	}
-
-	@Override
-	public List<SysPermission> getAllPermission() {
-		// TODO Auto-generated method stub
-		return permissMapper.selectAll();
-	}
-
-	@Override
-	public List<SysRolePermission> getRolePermission(int roleId) {
-		// TODO Auto-generated method stub
-		return rolePermissMapper.selectRolePermissionByRoleId(roleId);
-	}
-
-
 	@Override
 	public void addRolePermission(SysRoleInfoReq roleInfo) throws Exception {
 		// TODO Auto-generated method stub
 		if (StringUtils.isEmpty(roleInfo.getRoleId())) {
 			throw new SystemException("角色ID为空");
 		}
-		if (StringUtils.isEmpty(roleInfo.getModuleIds())) {
+			if (StringUtils.isEmpty(roleInfo.getModuleIds())) {
 			throw new SystemException("权限为空");
 		}
 		// 删除角色对应的所有权限

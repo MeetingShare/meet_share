@@ -24,11 +24,11 @@ public class PermissionController extends BaseController {
 	PermissionService permissionService;
 
 	/**
-	 * 权限列表
+	 * 权限列表基于分页
 	 */
 	@RequestMapping("/page_list")
 	@LogAnnotation(module = "权限管理",option = "获取权限列表基于分页")
-	public Object list(SysPermissionInfoReq permissionReq) {
+	public Object pageList(SysPermissionInfoReq permissionReq) {
 		logger.info("访问权限列表");
 		ApiResponse resp=new ApiResponse();
 		resp.setCode(MeetConstants.SYS_SUCCESS);
@@ -36,17 +36,17 @@ public class PermissionController extends BaseController {
 		resp.setData(permissionService.findPermissionListPage(permissionReq));
 		return resp;
 	}
-
 	/**
-	 * 获取所有权限不分页
+	 * 权限列表
 	 */
 	@RequestMapping("/list")
 	@LogAnnotation(module = "权限管理",option = "获取权限列表")
-	public Object addInfo() {
+	public Object list() {
+		logger.info("访问权限列表");
 		ApiResponse resp=new ApiResponse();
 		resp.setCode(MeetConstants.SYS_SUCCESS);
 		resp.setMsg("数据获取成功");
-		resp.setData(permissionService.findParentPermission());
+		resp.setData(permissionService.getAllPermission());
 		return resp;
 	}
 	/**

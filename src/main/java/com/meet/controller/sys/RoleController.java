@@ -23,16 +23,29 @@ public class RoleController extends BaseController {
 	private RoleService roleService;
 
 	/**
-	 * 角色列表
+	 * 角色列表基于分页
 	 */
 	@RequestMapping("/page_list")
 	@LogAnnotation(module = "角色管理",option = "获取角色列表基于分页")
-	public Object list(SysRoleInfoReq roleReq) {
+	public Object pageList(SysRoleInfoReq roleReq) {
 		logger.info("访问角色列表");
 		ApiResponse resp=new ApiResponse();
 		resp.setCode(MeetConstants.SYS_SUCCESS);
 		resp.setMsg("数据获取成功");
 		resp.setData(roleService.findRoleListPage(roleReq));
+		return resp;
+	}
+	/**
+	 * 角色列表
+	 */
+	@RequestMapping("/list")
+	@LogAnnotation(module = "角色管理",option = "获取角色列表")
+	public Object list() {
+		logger.info("访问角色列表");
+		ApiResponse resp=new ApiResponse();
+		resp.setCode(MeetConstants.SYS_SUCCESS);
+		resp.setMsg("数据获取成功");
+		resp.setData(roleService.getAllRole());
 		return resp;
 	}
 
@@ -108,7 +121,7 @@ public class RoleController extends BaseController {
 			resp.setCode(MeetConstants.SYS_FAILE);
 			resp.setMsg(e.getMessage());
 		}
-		return response;
+		return resp;
 	}
 
 }
