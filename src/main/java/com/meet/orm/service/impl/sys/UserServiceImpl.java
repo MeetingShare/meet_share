@@ -131,4 +131,28 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public SysUser login(SysUserInfoReq userInfoReq) throws Exception {
+		if(userInfoReq==null){
+			throw new SystemException("用户名或密码为空");
+		}
+		if(StringUtils.isEmpty(userInfoReq.getUsername())){
+			throw new SystemException("用户名为空");
+		}
+		if(StringUtils.isEmpty(userInfoReq.getPassword())){
+			throw new SystemException("密码为空");
+		}
+		SysUser data=userDao.findUserByName(userInfoReq.getUsername());
+		if(data==null){
+			throw new SystemException("用户不存在");
+		}
+		if(!Md5Util.md5Encode(userInfoReq.getPassword()).equals(data.getPassword())){
+			throw new SystemException("密码有误！");
+		}
+		if(!"0".equals(data.getActive())){
+			throw new SystemException("用户已禁用");
+		}
+
+		return data;
+	}
 }

@@ -42,7 +42,7 @@ public class MeetConstants {
 
 	// 用户sessionkey
 	public static final String SESSION_USER_NAME = "userName";
-	public static final String SESSION_USER_Id = "userId";
+	public static final String SESSION_USER_ID= "userId";
 
 	// 编码
 	public static final String DEFAULT_ENCODING = "UTF-8";

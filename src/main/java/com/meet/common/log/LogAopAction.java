@@ -56,8 +56,8 @@ public class LogAopAction {
             // 执行方法名
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             Integer userId = 0;
-            if (request.getSession().getAttribute(MeetConstants.SESSION_USER_Id) != null) {
-                userId = Integer.parseInt(request.getSession().getAttribute(MeetConstants.SESSION_USER_Id).toString());
+            if (request.getSession().getAttribute(MeetConstants.SESSION_USER_ID) != null) {
+                userId = Integer.parseInt(request.getSession().getAttribute(MeetConstants.SESSION_USER_ID).toString());
             }
             //获取请求参数
             Map<String, Object> map = map = getControllerMethodDescription(point);

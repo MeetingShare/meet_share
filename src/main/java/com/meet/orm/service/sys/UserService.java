@@ -78,4 +78,11 @@ public interface UserService {
 	 */
 	@Transactional(rollbackFor=Exception.class)
 	void setRole(SysUserInfoReq userInfo)throws Exception;
+
+	/**
+	 * 用户登录
+	 * @param userInfoReq
+	 * @throws Exception
+	 */
+	SysUser login(SysUserInfoReq userInfoReq) throws  Exception;
 }
