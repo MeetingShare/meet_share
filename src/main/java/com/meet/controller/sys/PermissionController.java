@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * 权限管理 Created by bzhx on 2017年3月17日 下午3:38:36
  */
 @RestController
-@RequestMapping("/api/back/module")
+@RequestMapping("/api/sys/module")
 public class PermissionController extends BaseController {
 
 	@Autowired

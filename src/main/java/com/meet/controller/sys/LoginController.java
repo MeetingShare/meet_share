@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/back/auth")
+@RequestMapping("/api/sys/auth")
 public class LoginController extends BaseController {
 
     @Autowired

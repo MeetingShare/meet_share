@@ -16,7 +16,7 @@ import com.meet.dto.rsp.ApiResponse;
 import com.meet.orm.service.sys.RoleService;
 
 @RestController
-@RequestMapping("/api/back/role")
+@RequestMapping("/api/sys/role")
 public class RoleController extends BaseController {
 
 	@Autowired

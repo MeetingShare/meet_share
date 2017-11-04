@@ -18,7 +18,7 @@ import com.meet.orm.service.sys.RoleService;
 import com.meet.orm.service.sys.UserService;
 
 @RestController
-@RequestMapping("/api/back/user")
+@RequestMapping("/api/sys/user")
 public class UserController extends BaseController {
 	
 	@Autowired
