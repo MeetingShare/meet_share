@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meet.orm.dao.SysProvinceMapper" >
+  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.SysProvince" >
+    <id column="ProvinceID" property="provinceid" jdbcType="BIGINT" />
+    <result column="ProvinceName" property="provincename" jdbcType="VARCHAR" />
+    <result column="DateCreated" property="datecreated" jdbcType="TIMESTAMP" />
+    <result column="DateUpdated" property="dateupdated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProvinceID, ProvinceName, DateCreated, DateUpdated
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT * FROM sys_province
+  </select>
+</mapper>

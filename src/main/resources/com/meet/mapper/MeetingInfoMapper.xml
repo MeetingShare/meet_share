@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meet.orm.dao.MeetingInfoMapper">
+    <resultMap id="BaseResultMap" type="com.meet.orm.pojo.MeetingInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="meet_no" property="meetNo" jdbcType="VARCHAR"/>
+        <result column="lock_no" property="lockNo" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="seating_count" property="seatingCount" jdbcType="INTEGER"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="support_facilities" property="supportFacilities" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="min_time" property="minTime" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="CHAR"/>
+        <result column="end_time" property="endTime" jdbcType="CHAR"/>
+        <result column="lat" property="lat" jdbcType="DOUBLE"/>
+        <result column="lng" property="lng" jdbcType="DOUBLE"/>
+        <result column="position" property="position" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="CHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, meet_no, lock_no, name, area, seating_count, city, province, address, type, support_facilities, 
+    status, min_time, start_time, end_time, lat, lng, position, remark, version, is_delete, 
+    create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from meet_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="insertSelective" parameterType="com.meet.orm.pojo.MeetingInfo" keyProperty="id" useGeneratedKeys="true">
+        insert into meet_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="meetNo != null">
+                meet_no,
+            </if>
+            <if test="lockNo != null">
+                lock_no,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="seatingCount != null">
+                seating_count,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="supportFacilities != null">
+                support_facilities,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="minTime != null">
+                min_time,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="lat != null">
+                lat,
+            </if>
+            <if test="lng != null">
+                lng,
+            </if>
+            <if test="position != null">
+                position,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="meetNo != null">
+                #{meetNo,jdbcType=VARCHAR},
+            </if>
+            <if test="lockNo != null">
+                #{lockNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="seatingCount != null">
+                #{seatingCount,jdbcType=INTEGER},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="supportFacilities != null">
+                #{supportFacilities,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="minTime != null">
+                #{minTime,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=CHAR},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=CHAR},
+            </if>
+            <if test="lat != null">
+                #{lat,jdbcType=DOUBLE},
+            </if>
+            <if test="lng != null">
+                #{lng,jdbcType=DOUBLE},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.MeetingInfo">
+        update meet_info
+        <set>
+            <if test="meetNo != null">
+                meet_no = #{meetNo,jdbcType=VARCHAR},
+            </if>
+            <if test="lockNo != null">
+                lock_no = #{lockNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="seatingCount != null">
+                seating_count = #{seatingCount,jdbcType=INTEGER},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="supportFacilities != null">
+                support_facilities = #{supportFacilities,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="minTime != null">
+                min_time = #{minTime,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=CHAR},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=CHAR},
+            </if>
+            <if test="lat != null">
+                lat = #{lat,jdbcType=DOUBLE},
+            </if>
+            <if test="lng != null">
+                lng = #{lng,jdbcType=DOUBLE},
+            </if>
+            <if test="position != null">
+                position = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!-- 获取所有会议室進行分頁 -->
+    <select id="findAllMeet" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        SELECT s.*,imf.path,imf.http_url httpUrl
+        from meet_info s
+        left join meet_image gim on gim.meet_id=s.id and gim.is_default='1'
+        left join image_file imf on imf.id=gim.image_id
+        where  s.is_delete='0'
+        <if test="name!=null">
+            and name LIKE
+            CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%')
+        </if>
+        order by s.id desc
+    </select>
+    <select id="selectMeetByLockNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select id from  meet_info where lock_no=#{lockNo}
+    </select>
+    <delete id="deleteMeetById" parameterType="java.lang.Integer">
+        update meet_info set is_delete='1' where id=#{id}
+    </delete>
+    <!-- 按照距离获取会议室信息 -->
+    <select id="selectDisanceByPage" resultMap="BaseResultMap">
+        select s.*,imf.path,imf.http_url httpUrl,DISTANCE(#{lat},#{lng},s.lat,s.lng) as distance
+        from store s
+        left join meet_image gim on gim.meet_id=s.id and gim.is_default='1'
+        left join image_file imf on imf.id=gim.image_id
+        <where>
+        <if test="name!=null and name!=''">
+            s.name LIKE CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="address!=null and address!=''">
+            and s.address LIKE CONCAT(CONCAT('%',#{address,jdbcType=VARCHAR}),'%')
+        </if>
+        </where>
+        order by distance desc
+    </select>
+
+    <!-- 获取商品详情 -->
+    <resultMap extends="BaseResultMap" id="imageMap" type="com.meet.orm.pojo.MeetingInfo">
+        <collection column="id" javaType="List" property="images" select="selectStoreImages" />
+    </resultMap>
+    <resultMap id="imageResultMap" type="com.meet.orm.pojo.ImageFile">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="width" jdbcType="INTEGER" property="width" />
+        <result column="height" jdbcType="INTEGER" property="height" />
+        <result column="size" jdbcType="INTEGER" property="size" />
+        <result column="path" jdbcType="VARCHAR" property="path" />
+        <result column="zip_path" jdbcType="VARCHAR" property="zipPath" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="http_url" jdbcType="VARCHAR" property="httpUrl" />
+        <result column="absolute_path" jdbcType="VARCHAR" property="absolutePath" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    </resultMap>
+    <select id="selectStoreImages" parameterType="java.lang.Integer" resultMap="imageResultMap">
+        select gim.is_default isDefault,imgf.* from meet_image gim join image_file imgf on imgf.id=gim.image_id where gim.meet_id=#{id}
+    </select>
+    <select id="selectInfoById" parameterType="java.lang.Integer" resultMap="imageMap">
+        select * from store where id=#{id}
+    </select>
+    <select id="selectStoreDetail" resultMap="imageMap">
+        select * ,DISTANCE(#{lat},#{lng},lat,lng) as distance from store where id=#{id}
+    </select>
+</mapper>

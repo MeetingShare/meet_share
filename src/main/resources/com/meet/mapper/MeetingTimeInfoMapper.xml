@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meet.orm.dao.MeetingTimeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.MeetingTimeInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="meet_no" property="meetNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="meeting_date" property="meetingDate" jdbcType="VARCHAR" />
+    <result column="meet_status" property="meetStatus" jdbcType="CHAR" />
+    <result column="meet_start_time" property="meetStartTime" jdbcType="VARCHAR" />
+    <result column="meet_length" property="meetLength" jdbcType="INTEGER" />
+    <result column="meet_end_time" property="meetEndTime" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, meet_no, order_no, meeting_date, meet_status, meet_start_time, meet_length, meet_end_time, 
+    version, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from meeting_time_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.meet.orm.pojo.MeetingTimeInfo" >
+    insert into meeting_time_info (id, meet_no, order_no, 
+      meeting_date, meet_status, meet_start_time, 
+      meet_length, meet_end_time, version, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{meetNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{meetingDate,jdbcType=VARCHAR}, #{meetStatus,jdbcType=CHAR}, #{meetStartTime,jdbcType=VARCHAR}, 
+      #{meetLength,jdbcType=INTEGER}, #{meetEndTime,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.meet.orm.pojo.MeetingTimeInfo" >
+    insert into meeting_time_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="meetNo != null" >
+        meet_no,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="meetingDate != null" >
+        meeting_date,
+      </if>
+      <if test="meetStatus != null" >
+        meet_status,
+      </if>
+      <if test="meetStartTime != null" >
+        meet_start_time,
+      </if>
+      <if test="meetLength != null" >
+        meet_length,
+      </if>
+      <if test="meetEndTime != null" >
+        meet_end_time,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="meetNo != null" >
+        #{meetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingDate != null" >
+        #{meetingDate,jdbcType=VARCHAR},
+      </if>
+      <if test="meetStatus != null" >
+        #{meetStatus,jdbcType=CHAR},
+      </if>
+      <if test="meetStartTime != null" >
+        #{meetStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="meetLength != null" >
+        #{meetLength,jdbcType=INTEGER},
+      </if>
+      <if test="meetEndTime != null" >
+        #{meetEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.MeetingTimeInfo" >
+    update meeting_time_info
+    <set >
+      <if test="meetNo != null" >
+        meet_no = #{meetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingDate != null" >
+        meeting_date = #{meetingDate,jdbcType=VARCHAR},
+      </if>
+      <if test="meetStatus != null" >
+        meet_status = #{meetStatus,jdbcType=CHAR},
+      </if>
+      <if test="meetStartTime != null" >
+        meet_start_time = #{meetStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="meetLength != null" >
+        meet_length = #{meetLength,jdbcType=INTEGER},
+      </if>
+      <if test="meetEndTime != null" >
+        meet_end_time = #{meetEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.MeetingTimeInfo" >
+    update meeting_time_info
+    set meet_no = #{meetNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      meeting_date = #{meetingDate,jdbcType=VARCHAR},
+      meet_status = #{meetStatus,jdbcType=CHAR},
+      meet_start_time = #{meetStartTime,jdbcType=VARCHAR},
+      meet_length = #{meetLength,jdbcType=INTEGER},
+      meet_end_time = #{meetEndTime,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

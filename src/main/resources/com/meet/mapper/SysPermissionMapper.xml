@@ -113,7 +113,7 @@
 	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from sys_permission ORDER by weight;
+		from sys_permission ORDER by weight DESC ;
 	</select>
 	<!-- 获取所有资源分页 -->
 
@@ -129,7 +129,7 @@
 				CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%')
 			</if>
 		</where>
-		order by weight asc, id desc
+		order by weight DESC, id desc
 	</select>
 	<!-- 通过角色名称获取资源信息 -->
 	<select id="selectByNameAndFId" resultMap="BaseResultMap">
@@ -154,6 +154,6 @@
 	<select id="selectParentPermission" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from sys_permission where f_id=0 ORDER by weight;
+		from sys_permission where f_id=0 ORDER by weight DESC;
 	</select>
 </mapper>

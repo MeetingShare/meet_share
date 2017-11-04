@@ -60,7 +60,7 @@
 		select sys_permission.* from sys_permission left join
 		sys_role_permission on
 		sys_permission.id=sys_role_permission.permission_id where
-		sys_role_permission.role_id=#{id}
+		sys_role_permission.role_id=#{id} ORDER BY sys_permission.weight DESC
 	</select>
 	<!-- 通过用户名获取用户信息结束 -->
 

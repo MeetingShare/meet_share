@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meet.orm.dao.MeetImageMapper" >
+  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.MeetImage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="meet_id" property="meetId" jdbcType="INTEGER" />
+    <result column="image_id" property="imageId" jdbcType="INTEGER" />
+    <result column="is_default" property="isDefault" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, meet_id, image_id, is_default, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from meet_image
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.meet.orm.pojo.MeetImage" >
+    insert into meet_image (id, meet_id, image_id, 
+      is_default, create_time)
+    values (#{id,jdbcType=INTEGER}, #{meetId,jdbcType=INTEGER}, #{imageId,jdbcType=INTEGER}, 
+      #{isDefault,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.meet.orm.pojo.MeetImage" >
+    insert into meet_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="meetId != null" >
+        meet_id,
+      </if>
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="isDefault != null" >
+        is_default,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="meetId != null" >
+        #{meetId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null" >
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.MeetImage" >
+    update meet_image
+    <set >
+      <if test="meetId != null" >
+        meet_id = #{meetId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null" >
+        image_id = #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null" >
+        is_default = #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.MeetImage" >
+    update meet_image
+    set meet_id = #{meetId,jdbcType=INTEGER},
+      image_id = #{imageId,jdbcType=INTEGER},
+      is_default = #{isDefault,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 判断imageId是否存在记录 -->
+  <select id="selectByImageId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from meet_image where image_id=#{imageId}
+  </select>
+  <delete id="deleteByImageId" parameterType="java.lang.Integer">
+    delete from meet_image where image_id=#{imageId}
+  </delete>
+  <!-- 删除商品的所有图片 -->
+  <delete id="deleteByMeetId" parameterType="java.lang.Integer">
+    delete from meet_image where meet_id=#{meetId}
+  </delete>
+
+</mapper>

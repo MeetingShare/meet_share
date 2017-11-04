@@ -13,7 +13,5 @@ public interface SysRolePermissionMapper {
     int updateByPrimaryKeySelective(SysRolePermission record);
 
 
-    List<SysRolePermission> selectRolePermissionByRoleId(int roleId);
-    
     int deleteRoleAllPermissionByRoleId(int roleId);
 }

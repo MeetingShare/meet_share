@@ -2,13 +2,9 @@ package com.meet.common;
 
 import java.io.StringReader;
 import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
+import com.meet.common.date.DateUtil;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -23,7 +19,7 @@ import org.dom4j.io.SAXReader;
  * @version V1.0
  */
 public class CommonUtils {
-	
+
 	/**
 	 * 作用：Map转xml
 	 */
@@ -62,7 +58,7 @@ public class CommonUtils {
 		// 得到根节点
 		Element root = doc.getRootElement();
 		// 获取所有子元素
-		for (Iterator i = root.elementIterator(); i.hasNext();) {
+		for (Iterator i = root.elementIterator(); i.hasNext(); ) {
 			Element el = (Element) i.next();
 			rtnMap.put(el.getName(), el.getText());
 
@@ -72,7 +68,7 @@ public class CommonUtils {
 
 	/**
 	 * 计算两点之间距离
-	 * 
+	 *
 	 * @param
 	 * @param
 	 * @return 米
@@ -96,9 +92,7 @@ public class CommonUtils {
 
 	/**
 	 * 取出一个指定长度大小的随机正整数.
-	 * 
-	 * @param length
-	 *            int 设定所取出随机数的长度。length小于11
+	 * @param length int 设定所取出随机数的长度。length小于11
 	 * @return int 返回生成的随机数。
 	 */
 	public static int buildRandom(int length) {
@@ -111,5 +105,13 @@ public class CommonUtils {
 			num = num * 10;
 		}
 		return (int) ((random * num));
+	}
+	public static String getMeetNo(){
+		String dateTime=DateUtil.format("yyyyMMddHH:mmssSS");
+		int random=new Random().nextInt(999999999);
+		return dateTime+random;
+	}
+	public static void main(String[] args){
+		System.out.print(new Random().nextInt(999999999));
 	}
 }

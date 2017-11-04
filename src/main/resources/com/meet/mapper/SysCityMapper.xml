@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.meet.orm.dao.SysCityMapper" >
+  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.SysCity" >
+    <id column="CityID" property="cityid" jdbcType="BIGINT" />
+    <result column="CityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="ZipCode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="ProvinceID" property="provinceid" jdbcType="BIGINT" />
+    <result column="DateCreated" property="datecreated" jdbcType="TIMESTAMP" />
+    <result column="DateUpdated" property="dateupdated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CityID, CityName, ZipCode, ProvinceID, DateCreated, DateUpdated
+  </sql>
+  <select id="selectByProvinceId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM sys_city WHERE ProvinceID=#{ProvinceID}
+  </select>
+</mapper>
