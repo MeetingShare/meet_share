@@ -46,10 +46,11 @@
 		<!-- 配置表信息 <table schema="ebill_payment_virtue" tableName="trade_out_log" 
 			domainObjectName="TradeOutLog" enableCountByExample="false" enableDeleteByExample="false" 
 			enableUpdateByExample="true" enableDeleteByPrimaryKey="false"/> -->
-		<table schema="meeting" tableName="image_file"
+		<table schema="meeting" tableName="account_send_code"
 			   enableSelectByExample="false" enableCountByExample="false"
 			   enableDeleteByExample="false" enableUpdateByExample="false"
 			   enableDeleteByPrimaryKey="false" />
+
 		<!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
 			是否生成 example类 -->
 		<!-- 忽略列，不生成bean 字段 -->

@@ -1,14 +1,14 @@
 package com.meet.common;
 
-import java.io.StringReader;
-import java.text.DecimalFormat;
-import java.util.*;
-
 import com.meet.common.date.DateUtil;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import java.io.StringReader;
+import java.text.DecimalFormat;
+import java.util.*;
 
 /**
  * @Title: CommonUtils.java
@@ -107,11 +107,8 @@ public class CommonUtils {
 		return (int) ((random * num));
 	}
 	public static String getMeetNo(){
-		String dateTime=DateUtil.format("yyyyMMddHH:mmssSS");
+		String dateTime= DateUtil.format("yyyyMMddHHmmssSS");
 		int random=new Random().nextInt(999999999);
 		return dateTime+random;
-	}
-	public static void main(String[] args){
-		System.out.print(new Random().nextInt(999999999));
 	}
 }

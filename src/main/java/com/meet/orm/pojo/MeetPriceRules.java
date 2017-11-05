@@ -10,9 +10,9 @@ public class MeetPriceRules {
 
     private String ruleDate;
 
-    private Float startTime;
+    private String startTime;
 
-    private Float endTime;
+    private String endTime;
 
     private BigDecimal unitPrice;
 
@@ -44,20 +44,20 @@ public class MeetPriceRules {
         this.ruleDate = ruleDate == null ? null : ruleDate.trim();
     }
 
-    public Float getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Float startTime) {
-        this.startTime = startTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime == null ? null : startTime.trim();
     }
 
-    public Float getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Float endTime) {
-        this.endTime = endTime;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime == null ? null : endTime.trim();
     }
 
     public BigDecimal getUnitPrice() {

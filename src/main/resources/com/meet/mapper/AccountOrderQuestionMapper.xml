@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.meet.orm.dao.AccountOrderQuestionMapper" >
-  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.AccountOrderQuestion" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
-    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="CHAR" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="back_time" property="backTime" jdbcType="TIMESTAMP" />
-    <result column="back_content" property="backContent" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meet.orm.dao.AccountOrderQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.AccountOrderQuestion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="back_time" jdbcType="TIMESTAMP" property="backTime" />
+    <result column="back_content" jdbcType="VARCHAR" property="backContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, uid, order_no, content, type, status, back_time, back_content, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from account_order_question
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.meet.orm.pojo.AccountOrderQuestion" >
+  <insert id="insert" parameterType="com.meet.orm.pojo.AccountOrderQuestion">
     insert into account_order_question (id, uid, order_no, 
       content, type, status, back_time, 
       back_content, create_time, update_time
@@ -32,107 +32,107 @@
       #{backContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.meet.orm.pojo.AccountOrderQuestion" >
+  <insert id="insertSelective" parameterType="com.meet.orm.pojo.AccountOrderQuestion">
     insert into account_order_question
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="uid != null" >
+      <if test="uid != null">
         uid,
       </if>
-      <if test="orderNo != null" >
+      <if test="orderNo != null">
         order_no,
       </if>
-      <if test="content != null" >
+      <if test="content != null">
         content,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="backTime != null" >
+      <if test="backTime != null">
         back_time,
       </if>
-      <if test="backContent != null" >
+      <if test="backContent != null">
         back_content,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="uid != null" >
+      <if test="uid != null">
         #{uid,jdbcType=INTEGER},
       </if>
-      <if test="orderNo != null" >
+      <if test="orderNo != null">
         #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="content != null" >
+      <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=CHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=CHAR},
       </if>
-      <if test="backTime != null" >
+      <if test="backTime != null">
         #{backTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="backContent != null" >
+      <if test="backContent != null">
         #{backContent,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.AccountOrderQuestion" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.AccountOrderQuestion">
     update account_order_question
-    <set >
-      <if test="uid != null" >
+    <set>
+      <if test="uid != null">
         uid = #{uid,jdbcType=INTEGER},
       </if>
-      <if test="orderNo != null" >
+      <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="content != null" >
+      <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=CHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=CHAR},
       </if>
-      <if test="backTime != null" >
+      <if test="backTime != null">
         back_time = #{backTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="backContent != null" >
+      <if test="backContent != null">
         back_content = #{backContent,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.AccountOrderQuestion" >
+  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.AccountOrderQuestion">
     update account_order_question
     set uid = #{uid,jdbcType=INTEGER},
       order_no = #{orderNo,jdbcType=VARCHAR},

@@ -15,9 +15,9 @@ public class MeetRulePriceReq extends SysRequest {
 
     private String ruleDate;
 
-    private Float startTime;
+    private String startTime;
 
-    private Float endTime;
+    private String endTime;
 
     private BigDecimal unitPrice;
 }

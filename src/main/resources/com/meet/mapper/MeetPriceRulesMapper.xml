@@ -1,124 +1,159 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.meet.orm.dao.MeetPriceRulesMapper" >
-  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.MeetPriceRules" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="meet_no" property="meetNo" jdbcType="VARCHAR" />
-    <result column="rule_date" property="ruleDate" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="REAL" />
-    <result column="end_time" property="endTime" jdbcType="REAL" />
-    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meet.orm.dao.MeetPriceRulesMapper">
+  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.MeetPriceRules">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="meet_no" jdbcType="VARCHAR" property="meetNo" />
+    <result column="rule_date" jdbcType="VARCHAR" property="ruleDate" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, meet_no, rule_date, start_time, end_time, unit_price, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from meet_price_rules
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.meet.orm.pojo.MeetPriceRules" >
+  <insert id="insert" parameterType="com.meet.orm.pojo.MeetPriceRules">
     insert into meet_price_rules (id, meet_no, rule_date, 
       start_time, end_time, unit_price, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{meetNo,jdbcType=VARCHAR}, #{ruleDate,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=REAL}, #{endTime,jdbcType=REAL}, #{unitPrice,jdbcType=DECIMAL}, 
+      #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.meet.orm.pojo.MeetPriceRules" >
+  <insert id="insertSelective" parameterType="com.meet.orm.pojo.MeetPriceRules">
     insert into meet_price_rules
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="meetNo != null" >
+      <if test="meetNo != null">
         meet_no,
       </if>
-      <if test="ruleDate != null" >
+      <if test="ruleDate != null">
         rule_date,
       </if>
-      <if test="startTime != null" >
+      <if test="startTime != null">
         start_time,
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null">
         end_time,
       </if>
-      <if test="unitPrice != null" >
+      <if test="unitPrice != null">
         unit_price,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="meetNo != null" >
+      <if test="meetNo != null">
         #{meetNo,jdbcType=VARCHAR},
       </if>
-      <if test="ruleDate != null" >
+      <if test="ruleDate != null">
         #{ruleDate,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null" >
-        #{startTime,jdbcType=REAL},
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
       </if>
-      <if test="endTime != null" >
-        #{endTime,jdbcType=REAL},
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
       </if>
-      <if test="unitPrice != null" >
+      <if test="unitPrice != null">
         #{unitPrice,jdbcType=DECIMAL},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.MeetPriceRules" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.MeetPriceRules">
     update meet_price_rules
-    <set >
-      <if test="meetNo != null" >
+    <set>
+      <if test="meetNo != null">
         meet_no = #{meetNo,jdbcType=VARCHAR},
       </if>
-      <if test="ruleDate != null" >
+      <if test="ruleDate != null">
         rule_date = #{ruleDate,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=REAL},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
       </if>
-      <if test="endTime != null" >
-        end_time = #{endTime,jdbcType=REAL},
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
       </if>
-      <if test="unitPrice != null" >
+      <if test="unitPrice != null">
         unit_price = #{unitPrice,jdbcType=DECIMAL},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.MeetPriceRules" >
+  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.MeetPriceRules">
     update meet_price_rules
     set meet_no = #{meetNo,jdbcType=VARCHAR},
       rule_date = #{ruleDate,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=REAL},
-      end_time = #{endTime,jdbcType=REAL},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
       unit_price = #{unitPrice,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findAllMeetPriceRules" resultMap="BaseResultMap" parameterType="com.meet.orm.pojo.MeetPriceRules">
+     select * from meet_price_rules
+     <where>
+       <if test="meetNo!=null">
+          meet_no like CONCAT(CONCAT('%',#{meetNo,jdbcType=VARCHAR}),'%')
+       </if>
+       <if test="ruleDate!=null">
+         and rule_date=#{ruleDate}
+       </if>
+     </where>
+      order by id desc
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from meet_price_rules where id=#{id}
+  </delete>
+
+  <select id="selectRuleIsExits" resultMap="BaseResultMap" parameterType="com.meet.orm.pojo.MeetPriceRules">
+      select * from meet_price_rules
+      <where>
+          <if test="meetNo!=null">
+              meetNo=#{meetNo}
+          </if>
+          <if test="id!=null and id!=0">
+            and id!=#{id}
+          </if>
+          <if test="ruleDate!=null">
+            and rule_date=#{ruleDate}
+          </if>
+          <if test="startTime!=null">
+            and start_time&lt;=#{startTime} and end_time&gt;=#{startTime}
+          </if>
+      </where>
+    limit 1
+  </select>
 </mapper>

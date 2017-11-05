@@ -29,6 +29,31 @@ public class UploadController extends BaseController {
 
 	@Autowired
 	private ImageService imageService;
+
+	/**
+	 * 头像上传接口
+	 */
+	@RequestMapping("/headImage")
+	public Object imgUpload(@RequestParam("file") MultipartFile file) throws IOException {
+		logger.info("头像上传：{}", file.getOriginalFilename());
+		UploadFileResp resp = new UploadFileResp();
+		String saveDirectory = MeetConstants.IMAGE_PATH + "/head/";
+		logger.info("头像上传路径：{}", saveDirectory);
+		File tempFile = new File(saveDirectory + file.getOriginalFilename());
+		if (!tempFile.exists()) {
+			tempFile.mkdirs();
+		}
+		file.transferTo(tempFile);
+		// 重命名
+		String id = UUID.randomUUID().toString();
+		String newFile = id + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."), file.getOriginalFilename().length());
+		tempFile.renameTo(new File(saveDirectory + newFile));
+		resp.setMsg("图片上传完成");
+		logger.info("头像访问地址：{}", MeetConstants.IMAGE_URL + "head/" + newFile);
+		resp.setFilePath(MeetConstants.IMAGE_URL + "head/" + newFile);
+		resp.setCode(MeetConstants.SYS_SUCCESS);
+		return resp;
+	}
 	
 	/**
 	 * 会议室图片上传接口
