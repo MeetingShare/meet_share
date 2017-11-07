@@ -55,7 +55,7 @@ public class MeetController extends BaseController{
         return resp;
     }
     /**
-     * 添加会议室
+     * 更新会议室
      */
     @RequestMapping("/edit")
     @LogAnnotation(module = "会议室管理",option = "更新会议室")

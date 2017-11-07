@@ -26,7 +26,7 @@ public class AccountController extends BaseController {
      * 会员列表
      */
     @RequestMapping("/page_list")
-    public Object list(AccountInfoReq reqInfo) {
+    public Object pageList(AccountInfoReq reqInfo) {
         logger.info("访问用户列表");
         ApiResponse resp = new ApiResponse();
         resp.setCode(MeetConstants.SYS_SUCCESS);

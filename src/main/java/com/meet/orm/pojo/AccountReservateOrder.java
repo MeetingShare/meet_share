@@ -10,7 +10,7 @@ public class AccountReservateOrder {
 
     private Integer uid;
 
-    private String uname;
+    private String uaccount;
 
     private String uopenId;
 
@@ -74,12 +74,12 @@ public class AccountReservateOrder {
         this.uid = uid;
     }
 
-    public String getUname() {
-        return uname;
+    public String getUaccount() {
+        return uaccount;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname == null ? null : uname.trim();
+    public void setUaccount(String uaccount) {
+        this.uaccount = uaccount == null ? null : uaccount.trim();
     }
 
     public String getUopenId() {

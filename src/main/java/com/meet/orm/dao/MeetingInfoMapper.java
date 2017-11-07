@@ -22,4 +22,6 @@ public interface MeetingInfoMapper {
 
     MeetingInfo selectInfoById(Integer id);
 
+    MeetingInfo selectByMeetNo(String meetNo);
+
 }

@@ -1,45 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.meet.orm.dao.AccountReservateOrderMapper" >
-  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.AccountReservateOrder" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
-    <result column="uname" property="uname" jdbcType="VARCHAR" />
-    <result column="uopen_id" property="uopenId" jdbcType="VARCHAR" />
-    <result column="meet_no" property="meetNo" jdbcType="VARCHAR" />
-    <result column="meet_name" property="meetName" jdbcType="VARCHAR" />
-    <result column="meet_date" property="meetDate" jdbcType="VARCHAR" />
-    <result column="meet_start_time" property="meetStartTime" jdbcType="VARCHAR" />
-    <result column="meet_length" property="meetLength" jdbcType="INTEGER" />
-    <result column="meet_end_time" property="meetEndTime" jdbcType="VARCHAR" />
-    <result column="meet_theme" property="meetTheme" jdbcType="VARCHAR" />
-    <result column="meet_person" property="meetPerson" jdbcType="VARCHAR" />
-    <result column="reminding" property="reminding" jdbcType="INTEGER" />
-    <result column="is_reminding" property="isReminding" jdbcType="CHAR" />
-    <result column="money" property="money" jdbcType="DECIMAL" />
-    <result column="total_time" property="totalTime" jdbcType="INTEGER" />
-    <result column="use_status" property="useStatus" jdbcType="CHAR" />
-    <result column="total_money" property="totalMoney" jdbcType="DECIMAL" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meet.orm.dao.AccountReservateOrderMapper">
+  <resultMap id="BaseResultMap" type="com.meet.orm.pojo.AccountReservateOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="uaccount" jdbcType="VARCHAR" property="uaccount" />
+    <result column="uopen_id" jdbcType="VARCHAR" property="uopenId" />
+    <result column="meet_no" jdbcType="VARCHAR" property="meetNo" />
+    <result column="meet_name" jdbcType="VARCHAR" property="meetName" />
+    <result column="meet_date" jdbcType="VARCHAR" property="meetDate" />
+    <result column="meet_start_time" jdbcType="VARCHAR" property="meetStartTime" />
+    <result column="meet_length" jdbcType="INTEGER" property="meetLength" />
+    <result column="meet_end_time" jdbcType="VARCHAR" property="meetEndTime" />
+    <result column="meet_theme" jdbcType="VARCHAR" property="meetTheme" />
+    <result column="meet_person" jdbcType="VARCHAR" property="meetPerson" />
+    <result column="reminding" jdbcType="INTEGER" property="reminding" />
+    <result column="is_reminding" jdbcType="CHAR" property="isReminding" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="total_time" jdbcType="INTEGER" property="totalTime" />
+    <result column="use_status" jdbcType="CHAR" property="useStatus" />
+    <result column="total_money" jdbcType="DECIMAL" property="totalMoney" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, order_no, uid, uname, uopen_id, meet_no, meet_name, meet_date, meet_start_time, 
+  <sql id="Base_Column_List">
+    id, order_no, uid, uaccount, uopen_id, meet_no, meet_name, meet_date, meet_start_time, 
     meet_length, meet_end_time, meet_theme, meet_person, reminding, is_reminding, money, 
     total_time, use_status, total_money, status, pay_time, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from account_reservate_order
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.meet.orm.pojo.AccountReservateOrder" >
+  <insert id="insert" parameterType="com.meet.orm.pojo.AccountReservateOrder">
     insert into account_reservate_order (id, order_no, uid, 
-      uname, uopen_id, meet_no, 
+      uaccount, uopen_id, meet_no, 
       meet_name, meet_date, meet_start_time, 
       meet_length, meet_end_time, meet_theme, 
       meet_person, reminding, is_reminding, 
@@ -47,7 +47,7 @@
       total_money, status, pay_time, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, 
-      #{uname,jdbcType=VARCHAR}, #{uopenId,jdbcType=VARCHAR}, #{meetNo,jdbcType=VARCHAR}, 
+      #{uaccount,jdbcType=VARCHAR}, #{uopenId,jdbcType=VARCHAR}, #{meetNo,jdbcType=VARCHAR}, 
       #{meetName,jdbcType=VARCHAR}, #{meetDate,jdbcType=VARCHAR}, #{meetStartTime,jdbcType=VARCHAR}, 
       #{meetLength,jdbcType=INTEGER}, #{meetEndTime,jdbcType=VARCHAR}, #{meetTheme,jdbcType=VARCHAR}, 
       #{meetPerson,jdbcType=VARCHAR}, #{reminding,jdbcType=INTEGER}, #{isReminding,jdbcType=CHAR}, 
@@ -55,228 +55,228 @@
       #{totalMoney,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{payTime,jdbcType=TIMESTAMP}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.meet.orm.pojo.AccountReservateOrder" >
+  <insert id="insertSelective" parameterType="com.meet.orm.pojo.AccountReservateOrder">
     insert into account_reservate_order
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="orderNo != null" >
+      <if test="orderNo != null">
         order_no,
       </if>
-      <if test="uid != null" >
+      <if test="uid != null">
         uid,
       </if>
-      <if test="uname != null" >
-        uname,
+      <if test="uaccount != null">
+        uaccount,
       </if>
-      <if test="uopenId != null" >
+      <if test="uopenId != null">
         uopen_id,
       </if>
-      <if test="meetNo != null" >
+      <if test="meetNo != null">
         meet_no,
       </if>
-      <if test="meetName != null" >
+      <if test="meetName != null">
         meet_name,
       </if>
-      <if test="meetDate != null" >
+      <if test="meetDate != null">
         meet_date,
       </if>
-      <if test="meetStartTime != null" >
+      <if test="meetStartTime != null">
         meet_start_time,
       </if>
-      <if test="meetLength != null" >
+      <if test="meetLength != null">
         meet_length,
       </if>
-      <if test="meetEndTime != null" >
+      <if test="meetEndTime != null">
         meet_end_time,
       </if>
-      <if test="meetTheme != null" >
+      <if test="meetTheme != null">
         meet_theme,
       </if>
-      <if test="meetPerson != null" >
+      <if test="meetPerson != null">
         meet_person,
       </if>
-      <if test="reminding != null" >
+      <if test="reminding != null">
         reminding,
       </if>
-      <if test="isReminding != null" >
+      <if test="isReminding != null">
         is_reminding,
       </if>
-      <if test="money != null" >
+      <if test="money != null">
         money,
       </if>
-      <if test="totalTime != null" >
+      <if test="totalTime != null">
         total_time,
       </if>
-      <if test="useStatus != null" >
+      <if test="useStatus != null">
         use_status,
       </if>
-      <if test="totalMoney != null" >
+      <if test="totalMoney != null">
         total_money,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="payTime != null" >
+      <if test="payTime != null">
         pay_time,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="orderNo != null" >
+      <if test="orderNo != null">
         #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="uid != null" >
+      <if test="uid != null">
         #{uid,jdbcType=INTEGER},
       </if>
-      <if test="uname != null" >
-        #{uname,jdbcType=VARCHAR},
+      <if test="uaccount != null">
+        #{uaccount,jdbcType=VARCHAR},
       </if>
-      <if test="uopenId != null" >
+      <if test="uopenId != null">
         #{uopenId,jdbcType=VARCHAR},
       </if>
-      <if test="meetNo != null" >
+      <if test="meetNo != null">
         #{meetNo,jdbcType=VARCHAR},
       </if>
-      <if test="meetName != null" >
+      <if test="meetName != null">
         #{meetName,jdbcType=VARCHAR},
       </if>
-      <if test="meetDate != null" >
+      <if test="meetDate != null">
         #{meetDate,jdbcType=VARCHAR},
       </if>
-      <if test="meetStartTime != null" >
+      <if test="meetStartTime != null">
         #{meetStartTime,jdbcType=VARCHAR},
       </if>
-      <if test="meetLength != null" >
+      <if test="meetLength != null">
         #{meetLength,jdbcType=INTEGER},
       </if>
-      <if test="meetEndTime != null" >
+      <if test="meetEndTime != null">
         #{meetEndTime,jdbcType=VARCHAR},
       </if>
-      <if test="meetTheme != null" >
+      <if test="meetTheme != null">
         #{meetTheme,jdbcType=VARCHAR},
       </if>
-      <if test="meetPerson != null" >
+      <if test="meetPerson != null">
         #{meetPerson,jdbcType=VARCHAR},
       </if>
-      <if test="reminding != null" >
+      <if test="reminding != null">
         #{reminding,jdbcType=INTEGER},
       </if>
-      <if test="isReminding != null" >
+      <if test="isReminding != null">
         #{isReminding,jdbcType=CHAR},
       </if>
-      <if test="money != null" >
+      <if test="money != null">
         #{money,jdbcType=DECIMAL},
       </if>
-      <if test="totalTime != null" >
+      <if test="totalTime != null">
         #{totalTime,jdbcType=INTEGER},
       </if>
-      <if test="useStatus != null" >
+      <if test="useStatus != null">
         #{useStatus,jdbcType=CHAR},
       </if>
-      <if test="totalMoney != null" >
+      <if test="totalMoney != null">
         #{totalMoney,jdbcType=DECIMAL},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=CHAR},
       </if>
-      <if test="payTime != null" >
+      <if test="payTime != null">
         #{payTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.AccountReservateOrder" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.meet.orm.pojo.AccountReservateOrder">
     update account_reservate_order
-    <set >
-      <if test="orderNo != null" >
+    <set>
+      <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="uid != null" >
+      <if test="uid != null">
         uid = #{uid,jdbcType=INTEGER},
       </if>
-      <if test="uname != null" >
-        uname = #{uname,jdbcType=VARCHAR},
+      <if test="uaccount != null">
+        uaccount = #{uaccount,jdbcType=VARCHAR},
       </if>
-      <if test="uopenId != null" >
+      <if test="uopenId != null">
         uopen_id = #{uopenId,jdbcType=VARCHAR},
       </if>
-      <if test="meetNo != null" >
+      <if test="meetNo != null">
         meet_no = #{meetNo,jdbcType=VARCHAR},
       </if>
-      <if test="meetName != null" >
+      <if test="meetName != null">
         meet_name = #{meetName,jdbcType=VARCHAR},
       </if>
-      <if test="meetDate != null" >
+      <if test="meetDate != null">
         meet_date = #{meetDate,jdbcType=VARCHAR},
       </if>
-      <if test="meetStartTime != null" >
+      <if test="meetStartTime != null">
         meet_start_time = #{meetStartTime,jdbcType=VARCHAR},
       </if>
-      <if test="meetLength != null" >
+      <if test="meetLength != null">
         meet_length = #{meetLength,jdbcType=INTEGER},
       </if>
-      <if test="meetEndTime != null" >
+      <if test="meetEndTime != null">
         meet_end_time = #{meetEndTime,jdbcType=VARCHAR},
       </if>
-      <if test="meetTheme != null" >
+      <if test="meetTheme != null">
         meet_theme = #{meetTheme,jdbcType=VARCHAR},
       </if>
-      <if test="meetPerson != null" >
+      <if test="meetPerson != null">
         meet_person = #{meetPerson,jdbcType=VARCHAR},
       </if>
-      <if test="reminding != null" >
+      <if test="reminding != null">
         reminding = #{reminding,jdbcType=INTEGER},
       </if>
-      <if test="isReminding != null" >
+      <if test="isReminding != null">
         is_reminding = #{isReminding,jdbcType=CHAR},
       </if>
-      <if test="money != null" >
+      <if test="money != null">
         money = #{money,jdbcType=DECIMAL},
       </if>
-      <if test="totalTime != null" >
+      <if test="totalTime != null">
         total_time = #{totalTime,jdbcType=INTEGER},
       </if>
-      <if test="useStatus != null" >
+      <if test="useStatus != null">
         use_status = #{useStatus,jdbcType=CHAR},
       </if>
-      <if test="totalMoney != null" >
+      <if test="totalMoney != null">
         total_money = #{totalMoney,jdbcType=DECIMAL},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=CHAR},
       </if>
-      <if test="payTime != null" >
+      <if test="payTime != null">
         pay_time = #{payTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.AccountReservateOrder" >
+  <update id="updateByPrimaryKey" parameterType="com.meet.orm.pojo.AccountReservateOrder">
     update account_reservate_order
     set order_no = #{orderNo,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=INTEGER},
-      uname = #{uname,jdbcType=VARCHAR},
+      uaccount = #{uaccount,jdbcType=VARCHAR},
       uopen_id = #{uopenId,jdbcType=VARCHAR},
       meet_no = #{meetNo,jdbcType=VARCHAR},
       meet_name = #{meetName,jdbcType=VARCHAR},
@@ -298,4 +298,25 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findAllReservateOrders" parameterType="com.meet.orm.pojo.AccountReservateOrder" resultMap="BaseResultMap">
+    select * from account_reservate_order
+    <where>
+      <if test="uid!=null">
+        uid=#{uid}
+      </if>
+      <if test="uaccount!=null" >
+        and uaccount=#{uaccount}
+      </if>
+      <if test="meetNo!=null">
+        and meet_no=#{meetNo}
+      </if>
+      <if test="orderNo!=null">
+        and order_no LIKE CONCAT(CONCAT('%',#{orderNo,jdbcType=VARCHAR}),'%')
+      </if>
+    </where>
+    order by id desc
+  </select>
+  <select id="selectByUID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from account_reservate_order where uid=${uid}
+  </select>
 </mapper>

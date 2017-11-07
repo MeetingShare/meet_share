@@ -46,7 +46,7 @@
 		<!-- 配置表信息 <table schema="ebill_payment_virtue" tableName="trade_out_log" 
 			domainObjectName="TradeOutLog" enableCountByExample="false" enableDeleteByExample="false" 
 			enableUpdateByExample="true" enableDeleteByPrimaryKey="false"/> -->
-		<table schema="meeting" tableName="account_send_code"
+		<table schema="meeting" tableName="account_reservate_order"
 			   enableSelectByExample="false" enableCountByExample="false"
 			   enableDeleteByExample="false" enableUpdateByExample="false"
 			   enableDeleteByPrimaryKey="false" />
